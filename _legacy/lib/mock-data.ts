@@ -1,0 +1,262 @@
+import type {
+  DocumentRecord,
+  VerificationRecord,
+  AdminUser,
+  DashboardStats,
+} from "@/lib/types";
+
+// ============================================================
+// Mock Admin
+// ============================================================
+export const mockAdmin: AdminUser = {
+  id: 1,
+  name: "Administrator",
+  email: "admin@uny.ac.id",
+};
+
+// ============================================================
+// Mock Documents — Data realistis mahasiswa UNY
+// ============================================================
+export const mockDocuments: DocumentRecord[] = [
+  {
+    id: 1,
+    title: "Pengembangan Sistem Informasi Akademik Berbasis Web",
+    documentType: "Sertifikat",
+    ownerName: "Ahmad Fauzan Hakim",
+    ownerIdentity: "20108241015",
+    faculty: "Fakultas Teknik",
+    studyProgram: "Pendidikan Teknik Informatika",
+    documentYear: 2024,
+    fileName: "skripsi_ahmad_fauzan.pdf",
+    filePath: "/uploads/skripsi_ahmad_fauzan.pdf",
+    hashSHA256: "a3f2c8e91d4b7f6a0e5c3d2b1a9f8e7d6c5b4a3f2e1d0c9b8a7f6e5d4c3b2a1",
+    cid: "QmXoypizjW3WknFiJnKLwHCnL72vedxjQkDDP1mXWo6uco",
+    institution: "Universitas Negeri Yogyakarta",
+    status: "ACTIVE",
+    createdAt: "2024-11-15T08:30:00Z",
+    updatedAt: "2024-11-15T08:30:00Z",
+    transactionHash: "0x1a2b3c4d5e6f7890abcdef1234567890abcdef12",
+  },
+  {
+    id: 2,
+    title: "Lembar Pengesahan Skripsi — Pendidikan Teknik Informatika",
+    documentType: "Sertifikat",
+    ownerName: "Ahmad Fauzan Hakim",
+    ownerIdentity: "20108241015",
+    faculty: "Fakultas Teknik",
+    studyProgram: "Pendidikan Teknik Informatika",
+    documentYear: 2024,
+    fileName: "pengesahan_ahmad_fauzan.pdf",
+    filePath: "/uploads/pengesahan_ahmad_fauzan.pdf",
+    hashSHA256: "b4e3d9f02e5c8a7b1f6d4e3c2b0a9f8e7d6c5b4a3f2e1d0c9b8a7f6e5d4c3b2",
+    institution: "Universitas Negeri Yogyakarta",
+    status: "ACTIVE",
+    createdAt: "2024-11-15T09:00:00Z",
+    updatedAt: "2024-11-15T09:00:00Z",
+  },
+  {
+    id: 3,
+    title: "Analisis Pengaruh Model Pembelajaran Kooperatif Terhadap Hasil Belajar Matematika",
+    documentType: "Sertifikat",
+    ownerName: "Siti Nurhaliza Putri",
+    ownerIdentity: "20301244012",
+    faculty: "Fakultas Matematika dan Ilmu Pengetahuan Alam",
+    studyProgram: "Pendidikan Matematika",
+    documentYear: 2024,
+    fileName: "skripsi_siti_nurhaliza.pdf",
+    filePath: "/uploads/skripsi_siti_nurhaliza.pdf",
+    hashSHA256: "c5f4e0a13f6d9b8c2a7e5f4d3c1b0a9f8e7d6c5b4a3f2e1d0c9b8a7f6e5d4c3",
+    cid: "QmYwAPJzv5CZsnA625s3Xf2nemtYgPpHdWEz79ojWnPbdG",
+    institution: "Universitas Negeri Yogyakarta",
+    status: "ACTIVE",
+    createdAt: "2024-10-20T10:15:00Z",
+    updatedAt: "2024-10-20T10:15:00Z",
+  },
+  {
+    id: 4,
+    title: "Surat Pernyataan Keaslian Skripsi",
+    documentType: "Sertifikat",
+    ownerName: "Siti Nurhaliza Putri",
+    ownerIdentity: "20301244012",
+    faculty: "Fakultas Matematika dan Ilmu Pengetahuan Alam",
+    studyProgram: "Pendidikan Matematika",
+    documentYear: 2024,
+    fileName: "pernyataan_keaslian_siti.pdf",
+    filePath: "/uploads/pernyataan_keaslian_siti.pdf",
+    hashSHA256: "d6a5f1b24a7e0c9d3b8f6a5e4d2c1b0a9f8e7d6c5b4a3f2e1d0c9b8a7f6e5d4",
+    institution: "Universitas Negeri Yogyakarta",
+    status: "ACTIVE",
+    createdAt: "2024-10-20T10:30:00Z",
+    updatedAt: "2024-10-20T10:30:00Z",
+  },
+  {
+    id: 5,
+    title: "Penerapan Metode Design Thinking dalam Perancangan UI/UX Aplikasi Mobile",
+    documentType: "Sertifikat",
+    ownerName: "Rizky Aditya Pratama",
+    ownerIdentity: "20108241023",
+    faculty: "Fakultas Teknik",
+    studyProgram: "Pendidikan Teknik Informatika",
+    documentYear: 2025,
+    fileName: "skripsi_rizky_aditya.pdf",
+    filePath: "/uploads/skripsi_rizky_aditya.pdf",
+    hashSHA256: "e7b6a2c35b8f1d0e4c9a7b6f5e3d2c1b0a9f8e7d6c5b4a3f2e1d0c9b8a7f6e5",
+    cid: "QmZtMRBp7rPQHQTV6cLzA8EXP8rNzLMfNb7Eokkx2sYtjy",
+    institution: "Universitas Negeri Yogyakarta",
+    status: "ACTIVE",
+    createdAt: "2025-01-12T14:00:00Z",
+    updatedAt: "2025-01-12T14:00:00Z",
+    transactionHash: "0x9f8e7d6c5b4a3f2e1d0c9b8a7f6e5d4c3b2a1f0e9d8c7b",
+  },
+  {
+    id: 6,
+    title: "Artikel Tugas Akhir — Efektivitas Media Pembelajaran Interaktif",
+    documentType: "Sertifikat",
+    ownerName: "Dewi Kartika Sari",
+    ownerIdentity: "20205241008",
+    faculty: "Fakultas Ilmu Pendidikan dan Psikologi",
+    studyProgram: "Teknologi Pendidikan",
+    documentYear: 2025,
+    fileName: "artikel_dewi_kartika.pdf",
+    filePath: "/uploads/artikel_dewi_kartika.pdf",
+    hashSHA256: "f8c7b3d46c9a2e1f5d0b8c7a6f4e3d2c1b0a9f8e7d6c5b4a3f2e1d0c9b8a7f6",
+    institution: "Universitas Negeri Yogyakarta",
+    status: "ACTIVE",
+    createdAt: "2025-02-28T11:45:00Z",
+    updatedAt: "2025-02-28T11:45:00Z",
+  },
+  {
+    id: 7,
+    title: "Hubungan Antara Kecerdasan Emosional dan Prestasi Akademik Mahasiswa",
+    documentType: "Sertifikat",
+    ownerName: "Bayu Setiawan",
+    ownerIdentity: "20401241019",
+    faculty: "Fakultas Ilmu Sosial, Hukum dan Ilmu Politik",
+    studyProgram: "Pendidikan Kewarganegaraan",
+    documentYear: 2024,
+    fileName: "skripsi_bayu_setiawan.pdf",
+    filePath: "/uploads/skripsi_bayu_setiawan.pdf",
+    hashSHA256: "09d8c4e57d0b3f2a6e1c9d8b7a5f4e3d2c1b0a9f8e7d6c5b4a3f2e1d0c9b8a7",
+    institution: "Universitas Negeri Yogyakarta",
+    status: "ACTIVE",
+    createdAt: "2024-09-05T09:20:00Z",
+    updatedAt: "2024-09-05T09:20:00Z",
+  },
+  {
+    id: 8,
+    title: "Surat Keterangan Lulus Ujian Skripsi",
+    documentType: "Surat Akademik Lainnya",
+    ownerName: "Anisa Rahmawati",
+    ownerIdentity: "20502241007",
+    faculty: "Fakultas Ekonomi dan Bisnis",
+    studyProgram: "Manajemen",
+    documentYear: 2025,
+    fileName: "surat_lulus_anisa.pdf",
+    filePath: "/uploads/surat_lulus_anisa.pdf",
+    hashSHA256: "1ae9d5f68e1c4a3b7f2d0e9c8b6a5f4e3d2c1b0a9f8e7d6c5b4a3f2e1d0c9b8",
+    institution: "Universitas Negeri Yogyakarta",
+    status: "ACTIVE",
+    createdAt: "2025-03-10T16:00:00Z",
+    updatedAt: "2025-03-10T16:00:00Z",
+  },
+];
+
+// ============================================================
+// Mock Verifications
+// ============================================================
+export const mockVerifications: VerificationRecord[] = [
+  {
+    id: 1,
+    uploadedHash: "a3f2c8e91d4b7f6a0e5c3d2b1a9f8e7d6c5b4a3f2e1d0c9b8a7f6e5d4c3b2a1",
+    status: "VALID",
+    documentId: 1,
+    documentTitle: "Pengembangan Sistem Informasi Akademik Berbasis Web",
+    documentOwner: "Ahmad Fauzan Hakim",
+    createdAt: "2025-04-20T10:30:00Z",
+  },
+  {
+    id: 2,
+    uploadedHash: "ff00aa11bb22cc33dd44ee55ff66aa77bb88cc99dd00ee11ff22aa33bb44cc55",
+    status: "NOT_REGISTERED",
+    createdAt: "2025-04-19T14:15:00Z",
+  },
+  {
+    id: 3,
+    uploadedHash: "c5f4e0a13f6d9b8c2a7e5f4d3c1b0a9f8e7d6c5b4a3f2e1d0c9b8a7f6e5d4c3",
+    status: "VALID",
+    documentId: 3,
+    documentTitle: "Analisis Pengaruh Model Pembelajaran Kooperatif Terhadap Hasil Belajar Matematika",
+    documentOwner: "Siti Nurhaliza Putri",
+    createdAt: "2025-04-18T08:45:00Z",
+  },
+  {
+    id: 4,
+    uploadedHash: "aabbccdd1122334455667788990011223344556677889900aabbccddeeff0011",
+    status: "NOT_REGISTERED",
+    createdAt: "2025-04-17T16:20:00Z",
+  },
+  {
+    id: 5,
+    uploadedHash: "e7b6a2c35b8f1d0e4c9a7b6f5e3d2c1b0a9f8e7d6c5b4a3f2e1d0c9b8a7f6e5",
+    status: "VALID",
+    documentId: 5,
+    documentTitle: "Penerapan Metode Design Thinking dalam Perancangan UI/UX Aplikasi Mobile",
+    documentOwner: "Rizky Aditya Pratama",
+    createdAt: "2025-04-16T11:10:00Z",
+  },
+  {
+    id: 6,
+    uploadedHash: "112233445566778899aabbccddeeff00112233445566778899aabbccddeeff00",
+    status: "INVALID",
+    documentId: 1,
+    documentTitle: "Pengembangan Sistem Informasi Akademik Berbasis Web",
+    documentOwner: "Ahmad Fauzan Hakim",
+    createdAt: "2025-04-15T09:30:00Z",
+  },
+  {
+    id: 7,
+    uploadedHash: "f8c7b3d46c9a2e1f5d0b8c7a6f4e3d2c1b0a9f8e7d6c5b4a3f2e1d0c9b8a7f6",
+    status: "VALID",
+    documentId: 6,
+    documentTitle: "Artikel Tugas Akhir — Efektivitas Media Pembelajaran Interaktif",
+    documentOwner: "Dewi Kartika Sari",
+    createdAt: "2025-04-14T13:55:00Z",
+  },
+  {
+    id: 8,
+    uploadedHash: "deadbeef0123456789abcdef0123456789abcdef0123456789abcdef01234567",
+    status: "NOT_REGISTERED",
+    createdAt: "2025-04-13T15:40:00Z",
+  },
+];
+
+// ============================================================
+// Mock Dashboard Stats
+// ============================================================
+export const mockDashboardStats: DashboardStats = {
+  totalDocuments: mockDocuments.length,
+  totalVerifications: mockVerifications.length,
+  validVerifications: mockVerifications.filter((v) => v.status === "VALID").length,
+  invalidVerifications: mockVerifications.filter((v) => v.status === "INVALID").length,
+  notRegisteredVerifications: mockVerifications.filter((v) => v.status === "NOT_REGISTERED").length,
+};
+
+// ============================================================
+// Helper: Fakultas list for dropdowns
+// ============================================================
+export const facultyList = [
+  "Fakultas Ilmu Pendidikan dan Psikologi",
+  "Fakultas Ilmu Sosial, Hukum dan Ilmu Politik",
+  "Fakultas Matematika dan Ilmu Pengetahuan Alam",
+  "Fakultas Ekonomi dan Bisnis",
+  "Fakultas Teknik",
+  "Fakultas Ilmu Keolahragaan dan Kesehatan",
+  "Fakultas Bahasa, Seni dan Budaya",
+  "Fakultas Vokasi",
+  "Pascasarjana",
+] as const;
+
+export const documentTypeList = [
+  "Sertifikat",
+  "Surat Akademik Lainnya",
+] as const;
