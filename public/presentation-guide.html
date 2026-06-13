@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panduan Presentasi - DocuVerify UNY</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+    :root {
+      --primary: #1e40af;
+      --primary-light: #3b82f6;
+      --accent: #059669;
+      --danger: #dc2626;
+      --bg: #ffffff;
+      --text: #1e293b;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --card-bg: #f8fafc;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.7;
+      font-size: 11pt;
+    }
+
+    .page {
+      max-width: 210mm;
+      margin: 0 auto;
+      padding: 15mm 20mm;
+    }
+
+    /* COVER PAGE */
+    .cover {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 90vh;
+      text-align: center;
+      page-break-after: always;
+    }
+    .cover-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: white;
+      padding: 6px 20px;
+      border-radius: 20px;
+      font-size: 9pt;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+    .cover h1 {
+      font-size: 28pt;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 8px;
+      letter-spacing: -0.5px;
+    }
+    .cover .subtitle {
+      font-size: 13pt;
+      color: var(--text-muted);
+      font-weight: 400;
+      margin-bottom: 40px;
+    }
+    .cover-meta {
+      border-top: 2px solid var(--border);
+      padding-top: 24px;
+      font-size: 10pt;
+      color: var(--text-muted);
+    }
+    .cover-meta strong { color: var(--text); }
+
+    /* HEADINGS */
+    h2 {
+      font-size: 16pt;
+      font-weight: 700;
+      color: var(--primary);
+      margin-top: 28px;
+      margin-bottom: 12px;
+      padding-bottom: 6px;
+      border-bottom: 2.5px solid var(--primary);
+      letter-spacing: -0.3px;
+    }
+    h3 {
+      font-size: 12pt;
+      font-weight: 700;
+      color: var(--text);
+      margin-top: 18px;
+      margin-bottom: 8px;
+    }
+    h4 {
+      font-size: 10.5pt;
+      font-weight: 600;
+      color: var(--primary-light);
+      margin-top: 14px;
+      margin-bottom: 6px;
+    }
+
+    p { margin-bottom: 8px; }
+
+    /* TABLES */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0;
+      font-size: 10pt;
+    }
+    th {
+      background: var(--primary);
+      color: white;
+      text-align: left;
+      padding: 8px 12px;
+      font-weight: 600;
+    }
+    td {
+      padding: 7px 12px;
+      border-bottom: 1px solid var(--border);
+    }
+    tr:nth-child(even) td { background: var(--card-bg); }
+
+    /* ORDERED LISTS */
+    ol, ul { margin: 8px 0 8px 20px; }
+    li { margin-bottom: 5px; }
+
+    /* FLOW BOXES */
+    .flow-container {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin: 14px 0;
+    }
+    .flow-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 10px 0;
+    }
+    .flow-num {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      background: var(--primary);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 10pt;
+    }
+    .flow-num.green { background: var(--accent); }
+    .flow-num.red { background: var(--danger); }
+    .flow-arrow {
+      width: 28px;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 14pt;
+      line-height: 1;
+      padding: 2px 0;
+    }
+    .flow-content { flex: 1; }
+    .flow-content strong { color: var(--text); }
+
+    /* TECH CARDS */
+    .tech-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 14px 0;
+    }
+    .tech-card {
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      padding: 14px;
+      background: var(--card-bg);
+    }
+    .tech-card-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+    .tech-icon {
+      width: 32px;
+      height: 32px;
+      background: var(--primary);
+      color: white;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 11pt;
+    }
+    .tech-icon.green { background: var(--accent); }
+    .tech-icon.orange { background: #ea580c; }
+    .tech-icon.purple { background: #7c3aed; }
+    .tech-icon.teal { background: #0d9488; }
+    .tech-icon.pink { background: #db2777; }
+    .tech-card h4 { margin: 0; color: var(--text); font-size: 10.5pt; }
+    .tech-card p { font-size: 9.5pt; color: var(--text-muted); margin: 0; }
+
+    /* INFO BOXES */
+    .info-box {
+      border-left: 4px solid var(--primary-light);
+      background: #eff6ff;
+      padding: 10px 14px;
+      margin: 12px 0;
+      border-radius: 0 6px 6px 0;
+      font-size: 10pt;
+    }
+    .info-box.warning {
+      border-left-color: #f59e0b;
+      background: #fffbeb;
+    }
+    .info-box.success {
+      border-left-color: var(--accent);
+      background: #ecfdf5;
+    }
+    .info-box.danger {
+      border-left-color: var(--danger);
+      background: #fef2f2;
+    }
+    .info-box strong { display: block; margin-bottom: 3px; }
+
+    /* CODE */
+    code {
+      font-family: 'Courier New', monospace;
+      background: #f1f5f9;
+      padding: 1px 5px;
+      border-radius: 3px;
+      font-size: 9.5pt;
+      color: var(--primary);
+    }
+
+    /* COMPARISON */
+    .comparison {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin: 14px 0;
+    }
+    .comparison-box {
+      border-radius: 8px;
+      padding: 14px;
+      text-align: center;
+    }
+    .comparison-box.valid {
+      background: #ecfdf5;
+      border: 2px solid var(--accent);
+    }
+    .comparison-box.invalid {
+      background: #fef2f2;
+      border: 2px solid var(--danger);
+    }
+    .comparison-box .emoji { font-size: 24pt; margin-bottom: 6px; }
+    .comparison-box .label {
+      font-weight: 700;
+      font-size: 11pt;
+    }
+    .comparison-box.valid .label { color: var(--accent); }
+    .comparison-box.invalid .label { color: var(--danger); }
+    .comparison-box .desc { font-size: 9pt; color: var(--text-muted); margin-top: 4px; }
+
+    /* SEPARATOR */
+    hr {
+      border: none;
+      border-top: 1.5px solid var(--border);
+      margin: 20px 0;
+    }
+
+    /* PRINT */
+    @media print {
+      body { font-size: 10.5pt; }
+      .page { padding: 10mm 15mm; }
+      .cover { min-height: 85vh; }
+      .no-print { display: none !important; }
+      h2 { page-break-after: avoid; }
+      .flow-step, .tech-card { break-inside: avoid; }
+      table { break-inside: avoid; }
+    }
+
+    /* PRINT BUTTON */
+    .print-btn {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-size: 11pt;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(30,64,175,0.35);
+      z-index: 100;
+      transition: transform 0.2s;
+    }
+    .print-btn:hover { transform: translateY(-2px); }
+  </style>
+</head>
+<body>
+
+<button class="print-btn no-print" onclick="window.print()">📄 Simpan sebagai PDF</button>
+
+<!-- ==================== COVER PAGE ==================== -->
+<div class="page cover">
+  <div class="cover-badge">Panduan Presentasi</div>
+  <h1>DocuVerify UNY</h1>
+  <p class="subtitle">Platform Verifikasi Keaslian Dokumen Digital Berbasis Kriptografi Hash SHA-256</p>
+  <div class="cover-meta">
+    <p><strong>Mata Kuliah:</strong> Proyek Mandiri</p>
+    <p><strong>Durasi Presentasi:</strong> 10 Menit</p>
+    <p><strong>Fokus:</strong> Alur Sistem & Teknologi Website</p>
+  </div>
+</div>
+
+<!-- ==================== PAGE: WAKTU ==================== -->
+<div class="page">
+  <h2>⏱️ Manajemen Waktu (10 Menit)</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Sesi</th>
+        <th>Topik</th>
+        <th>Durasi</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>1</strong></td><td>Latar Belakang & Masalah Pemalsuan</td><td>1 Menit</td></tr>
+      <tr><td><strong>2</strong></td><td>Konsep Solusi: Kriptografi SHA-256</td><td>1.5 Menit</td></tr>
+      <tr><td><strong>3</strong></td><td>Teknologi yang Digunakan (Tech Stack)</td><td>1.5 Menit</td></tr>
+      <tr><td><strong>4</strong></td><td>Alur Sistem: Pendaftaran Dokumen (Admin)</td><td>1.5 Menit</td></tr>
+      <tr><td><strong>5</strong></td><td>Alur Sistem: Verifikasi Publik (User)</td><td>1.5 Menit</td></tr>
+      <tr><td><strong>6</strong></td><td>Live Demo Website</td><td>2 Menit</td></tr>
+      <tr><td><strong>7</strong></td><td>Kesimpulan & Tanya Jawab</td><td>1 Menit</td></tr>
+    </tbody>
+  </table>
+
+  <hr>
+
+  <!-- ==================== SESI 1 ==================== -->
+  <h2>Sesi 1 — Latar Belakang & Masalah (1 Menit)</h2>
+
+  <h3>Apa yang Disampaikan:</h3>
+  <ul>
+    <li><strong>Pembukaan:</strong> "Selamat [pagi/siang], saya [Nama Anda]. Hari ini saya akan mempresentasikan project akhir saya berjudul <strong>DocuVerify UNY</strong>."</li>
+    <li><strong>Masalah:</strong> "Saat ini, pemalsuan dokumen digital seperti ijazah, sertifikat, dan transkrip nilai sangat mudah dilakukan menggunakan <em>software</em> editor PDF. Institusi maupun perusahaan kesulitan memastikan apakah dokumen PDF yang mereka terima itu asli keluaran kampus, atau sudah diedit oleh pihak tertentu."</li>
+    <li><strong>Tantangan Tambahan:</strong> "Menyimpan seluruh file dokumen asli ke dalam <em>database</em> untuk verifikasi silang bukan opsi yang ideal — ini akan menghabiskan kapasitas penyimpanan dan memiliki risiko kebocoran data pribadi mahasiswa."</li>
+  </ul>
+
+  <hr>
+
+  <!-- ==================== SESI 2 ==================== -->
+  <h2>Sesi 2 — Konsep Solusi: SHA-256 (1.5 Menit)</h2>
+
+  <h3>Apa yang Disampaikan:</h3>
+  <ul>
+    <li>"DocuVerify UNY menggunakan kriptografi <strong>Hash SHA-256</strong>. Alih-alih menyimpan file PDF ke <em>database</em>, sistem hanya menciptakan <strong>'Sidik Jari Digital'</strong> dari file tersebut."</li>
+    <li>"Hash bersifat <strong>satu arah</strong> (<em>one-way function</em>) — tidak bisa dibalik menjadi isi dokumen asli, sehingga privasi tetap terjaga."</li>
+    <li>"Hash juga bersifat <strong>unik</strong> — jika ada satu huruf atau satu titik saja yang ditambahkan atau dihapus di PDF, kode Hash-nya akan berubah <strong>total (100%)</strong>."</li>
+  </ul>
+
+  <div class="info-box success">
+    <strong>💡 Contoh untuk Dosen:</strong>
+    File PDF asli → Hash: <code>a7f3c9d8e1...</code><br>
+    File PDF diedit 1 huruf → Hash: <code>5b2e4f0a8c...</code> (berubah total!)
+  </div>
+</div>
+
+<!-- ==================== PAGE: TECH STACK ==================== -->
+<div class="page">
+  <h2>Sesi 3 — Teknologi yang Digunakan (1.5 Menit)</h2>
+
+  <h3>Apa yang Disampaikan:</h3>
+  <p>"Berikut adalah <em>tech stack</em> utama yang saya gunakan untuk membangun website ini:"</p>
+
+  <div class="tech-grid">
+    <div class="tech-card">
+      <div class="tech-card-header">
+        <div class="tech-icon">N</div>
+        <h4>Next.js 15 (React)</h4>
+      </div>
+      <p><strong>Kategori:</strong> Framework Fullstack</p>
+      <p>Framework React terbaru untuk membangun frontend dan backend (API Routes) dalam satu project. Mendukung Server-Side Rendering (SSR) dan Static Generation untuk performa maksimal.</p>
+    </div>
+
+    <div class="tech-card">
+      <div class="tech-card-header">
+        <div class="tech-icon green">S</div>
+        <h4>Supabase (PostgreSQL)</h4>
+      </div>
+      <p><strong>Kategori:</strong> Database Cloud</p>
+      <p>Database relasional PostgreSQL yang di-hosting di cloud. Menyimpan metadata dokumen dan kode Hash SHA-256. Diakses melalui koneksi pooler (PgBouncer) agar efisien dan scalable.</p>
+    </div>
+
+    <div class="tech-card">
+      <div class="tech-card-header">
+        <div class="tech-icon orange">P</div>
+        <h4>Prisma ORM</h4>
+      </div>
+      <p><strong>Kategori:</strong> Object-Relational Mapping</p>
+      <p>Library untuk berinteraksi dengan database menggunakan TypeScript. Menyederhanakan query database menjadi kode yang aman secara tipe data (type-safe).</p>
+    </div>
+
+    <div class="tech-card">
+      <div class="tech-card-header">
+        <div class="tech-icon purple">T</div>
+        <h4>TypeScript</h4>
+      </div>
+      <p><strong>Kategori:</strong> Bahasa Pemrograman</p>
+      <p>Superset dari JavaScript yang menambahkan sistem tipe statis. Mengurangi bug dan meningkatkan kualitas kode secara keseluruhan.</p>
+    </div>
+
+    <div class="tech-card">
+      <div class="tech-card-header">
+        <div class="tech-icon teal">W</div>
+        <h4>Web Crypto API (SHA-256)</h4>
+      </div>
+      <p><strong>Kategori:</strong> Kriptografi</p>
+      <p>API bawaan browser modern untuk menghitung Hash SHA-256 dari file PDF. Proses hashing dilakukan di sisi client (browser), sehingga file tidak perlu dikirim ke server untuk dihash.</p>
+    </div>
+
+    <div class="tech-card">
+      <div class="tech-card-header">
+        <div class="tech-icon pink">J</div>
+        <h4>JWT + bcrypt</h4>
+      </div>
+      <p><strong>Kategori:</strong> Autentikasi & Keamanan</p>
+      <p>JSON Web Token (JWT) untuk manajemen sesi admin. bcrypt untuk hashing password. Dilengkapi CSRF protection dan Rate Limiting untuk mencegah serangan brute-force.</p>
+    </div>
+  </div>
+
+  <h3>Arsitektur Singkat:</h3>
+  <div class="info-box">
+    <strong>🏗️ Arsitektur Aplikasi</strong>
+    <strong>Frontend</strong> (React/Next.js) → <strong>API Routes</strong> (Next.js Backend) → <strong>ORM</strong> (Prisma) → <strong>Database</strong> (Supabase PostgreSQL)<br><br>
+    Semua berjalan dalam satu project Next.js (monolith fullstack), sehingga deployment cukup satu kali ke platform seperti Vercel.
+  </div>
+
+  <hr>
+
+  <!-- ==================== SESI 4 ==================== -->
+  <h2>Sesi 4 — Alur Sistem: Pendaftaran Dokumen (1.5 Menit)</h2>
+
+  <h3>Apa yang Disampaikan:</h3>
+  <p>"Berikut alur sistem saat pihak kampus (Admin) mendaftarkan dokumen baru:"</p>
+
+  <div class="flow-container">
+    <div class="flow-step">
+      <div class="flow-num">1</div>
+      <div class="flow-content"><strong>Otentikasi Admin</strong> — Admin melakukan login menggunakan email dan password. Sistem memvalidasi kredensial menggunakan <code>bcrypt</code>, membuat sesi JWT, dan menyimpannya sebagai <em>HTTP-Only Cookie</em>. Dilindungi oleh Rate Limiting (maks 5 percobaan/10 menit).</div>
+    </div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-step">
+      <div class="flow-num">2</div>
+      <div class="flow-content"><strong>Input Metadata</strong> — Admin mengisi formulir: Nama Pemilik, NIM, Fakultas, Program Studi, Jenis Dokumen (Ijazah/Sertifikat/Transkrip), dan Tahun.</div>
+    </div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-step">
+      <div class="flow-num">3</div>
+      <div class="flow-content"><strong>Upload & Ekstraksi Hash</strong> — Admin mengunggah file PDF asli. File tersebut <strong>tidak</strong> disimpan ke cloud storage. Sistem langsung membaca konten biner file dan menghitungnya menjadi kode Hash SHA-256 (contoh: <code>e3b0c44298fc1c14...</code>).</div>
+    </div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-step">
+      <div class="flow-num">4</div>
+      <div class="flow-content"><strong>Simpan ke Database</strong> — Sistem mengirimkan data teks (metadata + kode Hash) ke database PostgreSQL via Prisma ORM. File PDF asli <strong>tidak ikut tersimpan</strong>.</div>
+    </div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-step">
+      <div class="flow-num green">✓</div>
+      <div class="flow-content"><strong>Selesai</strong> — Dokumen kini terdaftar secara sah. Audit log dicatat untuk keperluan jejak aktivitas admin.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== PAGE: VERIFIKASI + DEMO ==================== -->
+<div class="page">
+  <h2>Sesi 5 — Alur Sistem: Verifikasi Publik (1.5 Menit)</h2>
+
+  <h3>Apa yang Disampaikan:</h3>
+  <p>"Sekarang, alur saat pihak luar (HRD/Perusahaan) memverifikasi keaslian dokumen:"</p>
+
+  <div class="flow-container">
+    <div class="flow-step">
+      <div class="flow-num">1</div>
+      <div class="flow-content"><strong>Akses Publik</strong> — Verifikator membuka halaman utama website. <strong>Tidak perlu login</strong>. Halaman ini dirancang agar siapa saja bisa memverifikasi dokumen.</div>
+    </div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-step">
+      <div class="flow-num">2</div>
+      <div class="flow-content"><strong>Upload Dokumen</strong> — Verifikator mengunggah file PDF sertifikat/ijazah yang diterimanya (misalnya melalui Email atau WhatsApp dari pelamar kerja). Validasi dilakukan: hanya file PDF dan maks 10 MB.</div>
+    </div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-step">
+      <div class="flow-num">3</div>
+      <div class="flow-content"><strong>Kalkulasi Hash</strong> — Sistem secara instan menghitung ulang kode Hash SHA-256 dari file PDF yang baru diunggah tersebut menggunakan Web Crypto API.</div>
+    </div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-step">
+      <div class="flow-num">4</div>
+      <div class="flow-content"><strong>Pencocokan Database (Query)</strong> — Kode Hash hasil perhitungan tadi dikirim ke API Backend, yang kemudian melakukan <em>query</em> ke database: <code>SELECT * FROM Document WHERE fileHash = '...'</code></div>
+    </div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-step">
+      <div class="flow-num">5</div>
+      <div class="flow-content"><strong>Keputusan Validasi:</strong></div>
+    </div>
+  </div>
+
+  <div class="comparison">
+    <div class="comparison-box valid">
+      <div class="emoji">✅</div>
+      <div class="label">VALID (Hash Cocok)</div>
+      <div class="desc">Database menemukan record yang cocok. Layar berubah <strong>HIJAU</strong>. Metadata asli (Nama, NIM, Fakultas) ditampilkan sebagai bukti keaslian.</div>
+    </div>
+    <div class="comparison-box invalid">
+      <div class="emoji">❌</div>
+      <div class="label">TIDAK TERDAFTAR (Hash Tidak Cocok)</div>
+      <div class="desc">Hash tidak ditemukan di database. Artinya dokumen belum didaftarkan <strong>ATAU</strong> isinya sudah diedit/dipalsukan. Layar berubah <strong>MERAH</strong>.</div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ==================== SESI 6 ==================== -->
+  <h2>Sesi 6 — Live Demo Website (2 Menit)</h2>
+
+  <h3>Langkah Demo:</h3>
+
+  <h4>A. Demo Pendaftaran (Sisi Admin):</h4>
+  <ol>
+    <li>Buka <code>http://localhost:3000/admin/login</code>, login dengan akun admin.</li>
+    <li>Masuk ke Dashboard, tunjukkan ringkasan statistik.</li>
+    <li>Klik <strong>"Tambah Dokumen"</strong>. Isi metadata, unggah <code>Sertifikat_Asli.pdf</code>. Klik Simpan.</li>
+    <li><em>Jelaskan:</em> "Sistem baru saja menghitung Hash SHA-256 dari file ini dan menyimpannya ke database."</li>
+  </ol>
+
+  <h4>B. Demo Verifikasi Berhasil:</h4>
+  <ol>
+    <li>Buka tab baru (halaman publik) <code>http://localhost:3000/verify</code>.</li>
+    <li>Unggah <code>Sertifikat_Asli.pdf</code> yang sama.</li>
+    <li><strong>Hasil:</strong> Layar HIJAU (VALID) + data metadata muncul.</li>
+  </ol>
+
+  <h4>C. Demo Penolakan (Pembuktian Anti-Pemalsuan):</h4>
+  <ol>
+    <li>Unggah <code>Sertifikat_Palsu.pdf</code> (file asli yang sudah diedit sedikit isinya).</li>
+    <li><strong>Hasil:</strong> Layar MERAH (TIDAK TERDAFTAR).</li>
+    <li><em>Jelaskan:</em> "Cukup mengubah 1 huruf saja maka Hash-nya berubah total, dan sistem langsung menolaknya."</li>
+  </ol>
+
+  <div class="info-box warning">
+    <strong>⚠️ Persiapan Sebelum Demo:</strong>
+    Siapkan 2 file di Desktop Anda:<br>
+    1. <code>Sertifikat_Asli.pdf</code> — Untuk didaftarkan dan lolos verifikasi.<br>
+    2. <code>Sertifikat_Palsu.pdf</code> — File asli yang sudah Anda ubah 1 kata menggunakan PDF editor, lalu save ulang.
+  </div>
+
+  <hr>
+
+  <!-- ==================== SESI 7 ==================== -->
+  <h2>Sesi 7 — Kesimpulan (1 Menit)</h2>
+
+  <h3>Apa yang Disampaikan:</h3>
+  <ul>
+    <li>"Dengan alur sistem ini, DocuVerify UNY mampu <strong>mencegah pemalsuan dokumen secara absolut</strong> berkat kriptografi Hashing."</li>
+    <li>"Sistem sangat <strong>hemat penyimpanan</strong> karena hanya menyimpan kode Hash (teks), bukan file fisik PDF."</li>
+    <li>"<strong>Privasi dokumen terjaga</strong> karena Hash bersifat satu arah — tidak bisa dibalik menjadi isi dokumen asli."</li>
+    <li>"Dibangun menggunakan teknologi modern: <strong>Next.js, TypeScript, Supabase PostgreSQL, Prisma ORM, dan Web Crypto API</strong>."</li>
+  </ul>
+
+  <p>"Sekian presentasi dari saya, terima kasih atas perhatian Bapak/Ibu. Saya terbuka untuk pertanyaan."</p>
+
+  <hr>
+
+  <h2>💡 Tips Menghadapi Pertanyaan Dosen</h2>
+
+  <div class="info-box">
+    <strong>Q: "Kenapa tidak simpan saja file PDF-nya di database?"</strong>
+    A: "Menyimpan file biner PDF sangat menghabiskan storage dan berisiko terhadap kebocoran data pribadi. Dengan hashing, kita hanya menyimpan teks 64 karakter, namun tetap bisa membuktikan keaslian dokumen."
+  </div>
+
+  <div class="info-box">
+    <strong>Q: "Apa kelebihan SHA-256 dibanding metode lain?"</strong>
+    A: "SHA-256 menghasilkan hash 256-bit yang secara statistik impossible menghasilkan collision (dua file berbeda yang memiliki hash sama). Ini standar yang digunakan oleh Bitcoin dan berbagai sistem keamanan dunia."
+  </div>
+
+  <div class="info-box">
+    <strong>Q: "Bagaimana jika dokumen dikirim via WhatsApp?"</strong>
+    A: "Selama dikirim sebagai 'Dokumen' (bukan sebagai gambar/foto), file PDF tidak berubah dan akan tetap terverifikasi Valid karena data binernya identik."
+  </div>
+
+  <div class="info-box">
+    <strong>Q: "Kenapa memilih Next.js?"</strong>
+    A: "Next.js adalah framework fullstack — frontend dan backend (API) dalam satu project. Mendukung SSR untuk performa, dan sangat mudah di-deploy ke platform seperti Vercel."
+  </div>
+</div>
+
+</body>
+</html>

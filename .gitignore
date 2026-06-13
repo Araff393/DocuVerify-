@@ -1,0 +1,53 @@
+# Next.js
+.next
+.vercel
+out
+
+# Dependencies
+node_modules
+
+# Testing
+coverage
+.testsprite/
+testsprite_tests/
+codex_tmp_render/
+
+# Hardhat / Solidity
+artifacts
+cache
+typechain-types
+
+# Uploaded runtime files
+uploads/
+
+# Environment
+.env
+.env.local
+.env*.local
+.env.test
+
+# Database (Prisma + SQLite)
+/prisma/dev.db
+/prisma/dev.db-journal
+/prisma/*.db
+/prisma/*.db-journal
+
+# Logs
+*.log
+npm-debug.log*
+
+# Local agent/runtime artifacts
+.agents/
+skills-lock.json
+tsconfig.tsbuildinfo
+PanduanSkripsi
+laporan_progres_docuverify.py
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/*
+!.vscode/settings.json
+.idea

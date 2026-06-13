@@ -1,0 +1,97 @@
+// ============================================================
+// DocuVerify UNY — Prisma Schema (Supabase PostgreSQL)
+// ============================================================
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// ------------------------------------------------------------
+// Admin: akun administrator yang mendaftarkan dokumen
+// ------------------------------------------------------------
+model Admin {
+  id           Int      @id @default(autoincrement())
+  name         String
+  email        String   @unique
+  passwordHash String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  auditLogs AdminAuditLog[]
+}
+
+// ------------------------------------------------------------
+// Document: metadata + hash SHA-256 dokumen akademik
+// documentType: "Sertifikat Akademik" | "Sertifikat Lainnya"
+// status:       "ACTIVE" | "REVOKED"
+// ------------------------------------------------------------
+model Document {
+  id            Int      @id @default(autoincrement())
+  title         String
+  documentType  String
+  ownerName     String
+  ownerIdentity String
+  faculty       String
+  studyProgram  String
+  documentYear  Int
+  institution   String   @default("Universitas Negeri Yogyakarta")
+  fileName      String
+  filePath      String
+  hashSHA256    String   @unique
+  ipfsCid       String?
+  ipfsFileId    String?
+  status        String   @default("ACTIVE")
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  verifications VerificationLog[]
+
+  @@index([documentType])
+  @@index([faculty])
+  @@index([status])
+  @@index([createdAt])
+}
+
+// ------------------------------------------------------------
+// VerificationLog: riwayat setiap percobaan verifikasi publik
+// status: "VALID" | "NOT_REGISTERED" | "INVALID"
+// ------------------------------------------------------------
+model VerificationLog {
+  id           Int       @id @default(autoincrement())
+  uploadedHash String
+  status       String
+  documentId   Int?
+  document     Document? @relation(fields: [documentId], references: [id], onDelete: SetNull)
+  ipAddress    String?
+  createdAt    DateTime  @default(now())
+
+  @@index([status])
+  @@index([createdAt])
+  @@index([documentId])
+}
+
+// ------------------------------------------------------------
+// AdminAuditLog: jejak aksi penting yang dilakukan admin
+// action: "DOCUMENT_CREATED" | "DOCUMENT_REVOKED" | "PASSWORD_CHANGED" | "LOGOUT"
+// ------------------------------------------------------------
+model AdminAuditLog {
+  id         Int      @id @default(autoincrement())
+  adminId    Int
+  admin      Admin    @relation(fields: [adminId], references: [id], onDelete: Cascade)
+  action     String
+  targetType String?
+  targetId   String?
+  metadata   String?
+  ipAddress  String?
+  createdAt  DateTime @default(now())
+
+  @@index([adminId])
+  @@index([action])
+  @@index([createdAt])
+}
