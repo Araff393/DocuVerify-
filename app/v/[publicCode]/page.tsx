@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { unstable_cache } from "next/cache";
 
 import { Navigation } from "@/components/navigation";
 import { prisma } from "@/lib/db";
@@ -8,6 +9,31 @@ import { QrVerifyForm } from "./qr-verify-form";
 export const dynamic = "force-dynamic";
 
 type Params = { params: Promise<{ publicCode: string }> };
+
+const getPublicDocumentByCode = unstable_cache(
+  async (publicCode: string) =>
+    prisma.document.findUnique({
+      where: { publicCode },
+      select: {
+        id: true,
+        title: true,
+        documentType: true,
+        ownerName: true,
+        ownerIdentity: true,
+        faculty: true,
+        studyProgram: true,
+        documentYear: true,
+        institution: true,
+        publicCode: true,
+        hashSHA256: true,
+        ipfsCid: true,
+        status: true,
+        createdAt: true,
+      },
+    }),
+  ["public-document-by-code"],
+  { revalidate: 15 }
+);
 
 function StatusPanel({ status }: { status: "REGISTERED" | "NOT_REGISTERED" | "REVOKED" }) {
   const config = {
@@ -61,9 +87,7 @@ function StatusPanel({ status }: { status: "REGISTERED" | "NOT_REGISTERED" | "RE
 
 export default async function PublicDocumentVerificationPage({ params }: Params) {
   const { publicCode } = await params;
-  const document = await prisma.document.findUnique({
-    where: { publicCode },
-  });
+  const document = await getPublicDocumentByCode(publicCode);
 
   const pageStatus = !document
     ? "NOT_REGISTERED"

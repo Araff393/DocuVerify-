@@ -3,7 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 
-const TRANSITION_MS = 1100;
+const INITIAL_TRANSITION_MS = 700;
+const ROUTE_TRANSITION_MS = 500;
 
 export function PageTransitionLoader() {
   const pathname = usePathname();
@@ -20,7 +21,9 @@ export function PageTransitionLoader() {
   }, []);
 
   useEffect(() => {
-    if (previousPathname.current === null) {
+    const isInitialTransition = previousPathname.current === null;
+
+    if (isInitialTransition) {
       previousPathname.current = pathname;
       setVisible(true);
     } else if (previousPathname.current === pathname) {
@@ -43,7 +46,7 @@ export function PageTransitionLoader() {
 
     hideTimer.current = setTimeout(() => {
       setVisible(false);
-    }, TRANSITION_MS);
+    }, isInitialTransition ? INITIAL_TRANSITION_MS : ROUTE_TRANSITION_MS);
   }, [pathname, videoFailed]);
 
   return (

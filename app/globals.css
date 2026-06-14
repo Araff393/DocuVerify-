@@ -76,7 +76,7 @@ canvas {
 .page-transition-loader--visible {
   opacity: 1;
   transform: scale(1);
-  pointer-events: auto;
+  pointer-events: none;
 }
 
 .page-transition-loader__video {

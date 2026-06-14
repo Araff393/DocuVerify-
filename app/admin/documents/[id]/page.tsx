@@ -20,10 +20,31 @@ export default async function AdminDocumentDetailPage({ params }: Params) {
 
   const doc = await prisma.document.findUnique({
     where: { id },
-    include: {
+    select: {
+      id: true,
+      title: true,
+      documentType: true,
+      ownerName: true,
+      ownerIdentity: true,
+      faculty: true,
+      studyProgram: true,
+      documentYear: true,
+      institution: true,
+      fileName: true,
+      publicCode: true,
+      hashSHA256: true,
+      ipfsCid: true,
+      status: true,
+      createdAt: true,
       verifications: {
         orderBy: { createdAt: "desc" },
         take: 10,
+        select: {
+          id: true,
+          uploadedHash: true,
+          status: true,
+          createdAt: true,
+        },
       },
     },
   });

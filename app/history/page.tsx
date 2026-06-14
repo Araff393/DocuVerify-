@@ -7,10 +7,10 @@ import { formatHashPreview } from "@/lib/query";
 export const dynamic = "force-dynamic";
 
 export default async function HistoryPage() {
-  // Riwayat publik — tanpa IP address, max 50 terbaru
+  // Riwayat publik — tanpa IP address, ambil data terbaru secukupnya agar navigasi ringan.
   const verifications = await prisma.verificationLog.findMany({
     orderBy: { createdAt: "desc" },
-    take: 50,
+    take: 25,
     select: {
       id: true,
       uploadedHash: true,
@@ -19,8 +19,6 @@ export default async function HistoryPage() {
       documentId: true,
     },
   });
-
-  const totalCount = await prisma.verificationLog.count();
 
   const statusLabel = (status: string) => {
     switch (status) {
@@ -84,8 +82,8 @@ export default async function HistoryPage() {
               Catatan Verifikasi Dokumen
             </h1>
             <p className="text-base sm:text-lg text-slate-400 max-w-2xl leading-relaxed">
-              Daftar 50 percobaan verifikasi terbaru di sistem DocuVerify UNY.
-              Total <span className="text-[#8ff5ff] font-bold">{totalCount}</span> verifikasi telah tercatat sejak sistem aktif.
+              Daftar percobaan verifikasi terbaru di sistem DocuVerify UNY.
+              Data ditampilkan ringkas agar halaman publik tetap cepat dibuka.
             </p>
           </header>
 
@@ -196,8 +194,7 @@ export default async function HistoryPage() {
 
             <div className="px-4 sm:px-6 py-4 border-t border-outline-variant/10">
               <span className="text-xs text-slate-500 font-medium">
-                Menampilkan {verifications.length} riwayat terbaru dari total{" "}
-                {totalCount}
+                Menampilkan {verifications.length} riwayat terbaru
               </span>
             </div>
           </div>

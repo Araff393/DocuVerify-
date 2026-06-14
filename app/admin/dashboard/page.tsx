@@ -9,28 +9,48 @@ export default async function AdminDashboardPage() {
   // Query Prisma langsung (Server Component)
   const [
     totalDocuments,
-    totalVerifications,
-    validVerifications,
-    notRegisteredVerifications,
+    verificationCounts,
     recentDocs,
     recentVer,
   ] = await Promise.all([
     prisma.document.count(),
-    prisma.verificationLog.count(),
-    prisma.verificationLog.count({ where: { status: "VALID" } }),
-    prisma.verificationLog.count({ where: { status: "NOT_REGISTERED" } }),
+    prisma.verificationLog.groupBy({
+      by: ["status"],
+      _count: { _all: true },
+    }),
     prisma.document.findMany({
       orderBy: { createdAt: "desc" },
       take: 5,
+      select: {
+        id: true,
+        title: true,
+        ownerName: true,
+        faculty: true,
+        status: true,
+      },
     }),
     prisma.verificationLog.findMany({
       orderBy: { createdAt: "desc" },
       take: 5,
-      include: {
+      select: {
+        id: true,
+        status: true,
+        createdAt: true,
         document: { select: { title: true, ownerName: true } },
       },
     }),
   ]);
+
+  const verificationCountMap = new Map(
+    verificationCounts.map((item) => [item.status, item._count._all])
+  );
+  const totalVerifications = verificationCounts.reduce(
+    (total, item) => total + item._count._all,
+    0
+  );
+  const validVerifications = verificationCountMap.get("VALID") ?? 0;
+  const notRegisteredVerifications =
+    verificationCountMap.get("NOT_REGISTERED") ?? 0;
 
   const statCards = [
     {

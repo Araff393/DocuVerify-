@@ -60,6 +60,16 @@ export default async function AdminDocumentsPage({
       orderBy: { createdAt: "desc" },
       skip: pagination.skip,
       take: pagination.limit,
+      select: {
+        id: true,
+        title: true,
+        documentType: true,
+        ownerName: true,
+        ownerIdentity: true,
+        faculty: true,
+        documentYear: true,
+        status: true,
+      },
     }),
     prisma.document.count({ where }),
   ]);
