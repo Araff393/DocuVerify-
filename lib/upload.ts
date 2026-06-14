@@ -10,10 +10,12 @@ import { FILE_MAX_BYTES, FILE_MAX_MB } from "@/lib/constants";
 
 /**
  * Folder penyimpanan file PDF di server.
- * Diletakkan di root project (di luar public/) supaya file tidak
- * bisa diakses langsung tanpa melewati API route.
+ * Local development memakai root project. Vercel serverless hanya writable di
+ * /tmp, jadi runtime production memakai /tmp/uploads.
  */
-const UPLOAD_DIR = path.join(process.cwd(), "uploads");
+const UPLOAD_DIR = process.env.VERCEL
+  ? path.join("/tmp", "uploads")
+  : path.join(process.cwd(), "uploads");
 const PDF_MAGIC_BYTES = Buffer.from("%PDF-");
 
 /**
@@ -126,6 +128,12 @@ export function resolveUploadPath(relativePath: string): string {
   const normalized = path.normalize(relativePath).replace(/^[/\\]+/, "");
   if (normalized.startsWith("..") || normalized.includes("..")) {
     throw new AppError("validation", "Invalid file path.", 400);
+  }
+  if (normalized === "uploads") {
+    return UPLOAD_DIR;
+  }
+  if (normalized.startsWith(`uploads${path.sep}`)) {
+    return path.join(UPLOAD_DIR, normalized.slice("uploads".length + 1));
   }
   return path.join(process.cwd(), normalized);
 }
