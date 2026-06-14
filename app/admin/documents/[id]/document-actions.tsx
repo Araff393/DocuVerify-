@@ -10,6 +10,7 @@ type Props = {
   documentId: number;
   qrContent: string;
   fileName: string;
+  publicCode: string;
   hashSHA256: string;
   ipfsCid: string | null;
   status: string;
@@ -19,6 +20,7 @@ export function DocumentActions({
   documentId,
   qrContent,
   fileName,
+  publicCode,
   hashSHA256,
   ipfsCid,
   status,
@@ -148,10 +150,24 @@ export function DocumentActions({
             <canvas ref={qrCanvasRef} width={200} height={200} />
           </div>
           <p className="text-[10px] text-slate-500 text-center">
-            {ipfsCid
-              ? "QR Code berisi tautan IPFS Gateway"
-              : "QR Code berisi hash SHA-256 dokumen"}
+            QR Code berisi tautan verifikasi publik dokumen
           </p>
+          <div className="w-full bg-[#080e1c] p-3 rounded-lg border border-[#424858]/30">
+            <p className="text-[10px] text-slate-500 uppercase tracking-widest mb-2">
+              URL Verifikasi Publik
+            </p>
+            <code className="text-[11px] text-[#8ff5ff] font-mono break-all">
+              {qrContent}
+            </code>
+          </div>
+          <div className="w-full bg-[#080e1c] p-3 rounded-lg border border-[#424858]/30">
+            <p className="text-[10px] text-slate-500 uppercase tracking-widest mb-2">
+              Kode Dokumen Publik
+            </p>
+            <code className="text-[11px] text-secondary font-mono break-all">
+              {publicCode}
+            </code>
+          </div>
           {qrError && (
             <p className="text-xs text-error text-center">{qrError}</p>
           )}

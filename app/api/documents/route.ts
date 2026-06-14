@@ -25,6 +25,7 @@ import {
   uploadPdfToPinata,
 } from "@/lib/pinata";
 import { requiresPersistentPdfStorage } from "@/lib/env";
+import { generatePublicCode } from "@/lib/public-document";
 
 export const runtime = "nodejs";
 
@@ -133,6 +134,26 @@ export async function POST(request: Request) {
 
     // Insert ke DB — andalkan unique constraint hashSHA256 untuk cegah duplikat
     try {
+      let publicCode: string | null = null;
+      for (let attempt = 0; attempt < 10; attempt += 1) {
+        const candidate = generatePublicCode(input.documentYear);
+        const existingCode = await prisma.document.findUnique({
+          where: { publicCode: candidate },
+          select: { id: true },
+        });
+        if (!existingCode) {
+          publicCode = candidate;
+          break;
+        }
+      }
+      if (!publicCode) {
+        throw new AppError(
+          "database",
+          "Gagal membuat kode publik dokumen. Silakan coba lagi.",
+          500
+        );
+      }
+
       const document = await prisma.document.create({
         data: {
           title: input.title,
@@ -144,6 +165,7 @@ export async function POST(request: Request) {
           documentYear: input.documentYear,
           fileName: saved.fileName,
           filePath: saved.filePath,
+          publicCode,
           hashSHA256,
           ipfsCid: pinataResult?.cid ?? null,
           ipfsFileId: pinataResult?.id ?? null,

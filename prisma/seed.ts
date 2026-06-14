@@ -13,6 +13,7 @@
  */
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
+import { generatePublicCode, isDocuVerifyPublicCode } from "@/lib/public-document";
 
 const prisma = new PrismaClient();
 
@@ -50,6 +51,7 @@ type DocumentSeed = {
   fileName: string;
   filePath: string;
   hashSHA256: string;
+  publicCode?: string;
   ipfsCid?: string;
   status?: "ACTIVE" | "REVOKED";
   createdAt: Date;
@@ -67,6 +69,7 @@ const documentSeeds: DocumentSeed[] = [
     fileName: "skripsi_ahmad_fauzan.pdf",
     filePath: "/uploads/skripsi_ahmad_fauzan.pdf",
     hashSHA256: "a3f2c8e91d4b7f6a0e5c3d2b1a9f8e7d6c5b4a3f2e1d0c9b8a7f6e5d4c3b2a1",
+    publicCode: "DOC-UNY-2024-AFHA01",
     ipfsCid: "QmXoypizjW3WknFiJnKLwHCnL72vedxjQkDDP1mXWo6uco",
     createdAt: new Date("2024-11-15T08:30:00Z"),
   },
@@ -81,6 +84,7 @@ const documentSeeds: DocumentSeed[] = [
     fileName: "pengesahan_ahmad_fauzan.pdf",
     filePath: "/uploads/pengesahan_ahmad_fauzan.pdf",
     hashSHA256: "b4e3d9f02e5c8a7b1f6d4e3c2b0a9f8e7d6c5b4a3f2e1d0c9b8a7f6e5d4c3b2",
+    publicCode: "DOC-UNY-2024-AFHA02",
     createdAt: new Date("2024-11-15T09:00:00Z"),
   },
   {
@@ -94,6 +98,7 @@ const documentSeeds: DocumentSeed[] = [
     fileName: "skripsi_siti_nurhaliza.pdf",
     filePath: "/uploads/skripsi_siti_nurhaliza.pdf",
     hashSHA256: "c5f4e0a13f6d9b8c2a7e5f4d3c1b0a9f8e7d6c5b4a3f2e1d0c9b8a7f6e5d4c3",
+    publicCode: "DOC-UNY-2024-SNHP01",
     ipfsCid: "QmYwAPJzv5CZsnA625s3Xf2nemtYgPpHdWEz79ojWnPbdG",
     createdAt: new Date("2024-10-20T10:15:00Z"),
   },
@@ -108,6 +113,7 @@ const documentSeeds: DocumentSeed[] = [
     fileName: "pernyataan_keaslian_siti.pdf",
     filePath: "/uploads/pernyataan_keaslian_siti.pdf",
     hashSHA256: "d6a5f1b24a7e0c9d3b8f6a5e4d2c1b0a9f8e7d6c5b4a3f2e1d0c9b8a7f6e5d4",
+    publicCode: "DOC-UNY-2024-SNHP02",
     createdAt: new Date("2024-10-20T10:30:00Z"),
   },
   {
@@ -121,6 +127,7 @@ const documentSeeds: DocumentSeed[] = [
     fileName: "skripsi_rizky_aditya.pdf",
     filePath: "/uploads/skripsi_rizky_aditya.pdf",
     hashSHA256: "e7b6a2c35b8f1d0e4c9a7b6f5e3d2c1b0a9f8e7d6c5b4a3f2e1d0c9b8a7f6e5",
+    publicCode: "DOC-UNY-2025-RAPR01",
     ipfsCid: "QmZtMRBp7rPQHQTV6cLzA8EXP8rNzLMfNb7Eokkx2sYtjy",
     createdAt: new Date("2025-01-12T14:00:00Z"),
   },
@@ -135,6 +142,7 @@ const documentSeeds: DocumentSeed[] = [
     fileName: "artikel_dewi_kartika.pdf",
     filePath: "/uploads/artikel_dewi_kartika.pdf",
     hashSHA256: "f8c7b3d46c9a2e1f5d0b8c7a6f4e3d2c1b0a9f8e7d6c5b4a3f2e1d0c9b8a7f6",
+    publicCode: "DOC-UNY-2025-DKSA01",
     createdAt: new Date("2025-02-28T11:45:00Z"),
   },
   {
@@ -148,6 +156,7 @@ const documentSeeds: DocumentSeed[] = [
     fileName: "skripsi_bayu_setiawan.pdf",
     filePath: "/uploads/skripsi_bayu_setiawan.pdf",
     hashSHA256: "09d8c4e57d0b3f2a6e1c9d8b7a5f4e3d2c1b0a9f8e7d6c5b4a3f2e1d0c9b8a7",
+    publicCode: "DOC-UNY-2024-BSET01",
     createdAt: new Date("2024-09-05T09:20:00Z"),
   },
   {
@@ -161,6 +170,7 @@ const documentSeeds: DocumentSeed[] = [
     fileName: "surat_lulus_anisa.pdf",
     filePath: "/uploads/surat_lulus_anisa.pdf",
     hashSHA256: "1ae9d5f68e1c4a3b7f2d0e9c8b6a5f4e3d2c1b0a9f8e7d6c5b4a3f2e1d0c9b8",
+    publicCode: "DOC-UNY-2025-ANRA01",
     createdAt: new Date("2025-03-10T16:00:00Z"),
   },
 ];
@@ -246,6 +256,7 @@ async function main() {
 
   // --- Documents ---
   for (const seed of documentSeeds) {
+    const publicCode = seed.publicCode ?? generatePublicCode(seed.documentYear);
     await prisma.document.upsert({
       where: { hashSHA256: seed.hashSHA256 },
       update: {
@@ -258,6 +269,7 @@ async function main() {
         documentYear: seed.documentYear,
         fileName: seed.fileName,
         filePath: seed.filePath,
+        publicCode,
         ipfsCid: seed.ipfsCid ?? null,
         status: seed.status ?? "ACTIVE",
       },
@@ -271,6 +283,7 @@ async function main() {
         documentYear: seed.documentYear,
         fileName: seed.fileName,
         filePath: seed.filePath,
+        publicCode,
         hashSHA256: seed.hashSHA256,
         ipfsCid: seed.ipfsCid ?? null,
         status: seed.status ?? "ACTIVE",
@@ -279,6 +292,38 @@ async function main() {
     });
   }
   console.log(`✔  Documents seeded: ${documentSeeds.length}`);
+
+  const documentsWithoutOfficialCode = await prisma.document.findMany({
+    where: {
+      NOT: { publicCode: { startsWith: "DOC-UNY-" } },
+    },
+    select: { id: true, documentYear: true, publicCode: true },
+  });
+
+  for (const document of documentsWithoutOfficialCode) {
+    if (isDocuVerifyPublicCode(document.publicCode)) continue;
+
+    let publicCode: string | null = null;
+    for (let attempt = 0; attempt < 10; attempt += 1) {
+      const candidate = generatePublicCode(document.documentYear);
+      const existingCode = await prisma.document.findUnique({
+        where: { publicCode: candidate },
+        select: { id: true },
+      });
+      if (!existingCode || existingCode.id === document.id) {
+        publicCode = candidate;
+        break;
+      }
+    }
+
+    if (publicCode) {
+      await prisma.document.update({
+        where: { id: document.id },
+        data: { publicCode },
+      });
+    }
+  }
+  console.log(`✔  Public codes backfilled: ${documentsWithoutOfficialCode.length}`);
 
   // --- Verification logs ---
   // Hapus log lama supaya tidak duplikat setiap run (log tidak punya field unik).

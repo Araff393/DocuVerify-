@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 
 import { AdminLayout } from "@/components/admin-layout";
 import { prisma } from "@/lib/db";
+import { getPublicVerificationUrl } from "@/lib/public-document";
 import { DocumentActions } from "./document-actions";
 
 export const dynamic = "force-dynamic";
@@ -79,10 +80,7 @@ export default async function AdminDocumentDetailPage({ params }: Params) {
     },
   ];
 
-  // QR berisi gateway IPFS jika ada CID, fallback ke hash
-  const qrContent = doc.ipfsCid
-    ? `https://gateway.pinata.cloud/ipfs/${doc.ipfsCid}`
-    : doc.hashSHA256;
+  const qrContent = getPublicVerificationUrl(doc.publicCode);
 
   return (
     <AdminLayout
@@ -222,6 +220,7 @@ export default async function AdminDocumentDetailPage({ params }: Params) {
           documentId={doc.id}
           qrContent={qrContent}
           fileName={doc.fileName}
+          publicCode={doc.publicCode}
           hashSHA256={doc.hashSHA256}
           ipfsCid={doc.ipfsCid}
           status={doc.status}

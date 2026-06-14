@@ -37,6 +37,7 @@ export type DocumentRecord = {
   documentYear: number;
   fileName: string;
   filePath: string;
+  publicCode: string;
   hashSHA256: string;
   cid?: string; // IPFS CID (bonus, opsional)
   institution: string; // Always "Universitas Negeri Yogyakarta"

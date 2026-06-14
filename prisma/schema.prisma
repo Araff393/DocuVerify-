@@ -43,6 +43,7 @@ model Document {
   institution   String   @default("Universitas Negeri Yogyakarta")
   fileName      String
   filePath      String
+  publicCode    String   @unique @default(cuid())
   hashSHA256    String   @unique
   ipfsCid       String?
   ipfsFileId    String?
@@ -54,6 +55,7 @@ model Document {
 
   @@index([documentType])
   @@index([faculty])
+  @@index([publicCode])
   @@index([status])
   @@index([createdAt])
 }
