@@ -6,7 +6,7 @@ export default function VerifyPage() {
     <div className="bg-[#080e1c] text-[#f8fafc] min-h-screen selection:bg-[#8ff5ff]/30 selection:text-[#8ff5ff]">
       <Navigation />
 
-      <main className="pt-28 pb-20 px-6 md:px-16">
+      <main className="pt-28 pb-20 px-4 sm:px-6 md:px-16">
         <div className="max-w-6xl mx-auto">
           {/* Page Header */}
           <header className="mb-12">
@@ -18,10 +18,10 @@ export default function VerifyPage() {
                 Verifikasi Publik
               </span>
             </div>
-            <h1 className="text-4xl md:text-5xl font-serif-accent text-white tracking-tight glow-text mb-4">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-serif-accent text-white tracking-tight glow-text mb-4">
               Verifikasi Keaslian Dokumen
             </h1>
-            <p className="text-lg text-slate-400 max-w-2xl leading-relaxed">
+            <p className="text-base sm:text-lg text-slate-400 max-w-2xl leading-relaxed">
               Unggah file PDF dokumen akademik untuk memeriksa keasliannya.
               Sistem akan menghitung hash kriptografis dan mencocokkannya dengan database secara otomatis.
             </p>

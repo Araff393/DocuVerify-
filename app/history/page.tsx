@@ -65,7 +65,7 @@ export default async function HistoryPage() {
     <div className="bg-[#080e1c] text-[#f8fafc] min-h-screen selection:bg-[#8ff5ff]/30 selection:text-[#8ff5ff]">
       <Navigation />
 
-      <main className="pt-28 pb-20 px-6 md:px-16">
+      <main className="pt-28 pb-20 px-4 sm:px-6 md:px-16">
         <div className="max-w-6xl mx-auto">
           {/* Page Header */}
           <header className="mb-12">
@@ -80,10 +80,10 @@ export default async function HistoryPage() {
                 Riwayat Verifikasi Publik
               </span>
             </div>
-            <h1 className="text-4xl md:text-5xl font-serif-accent text-white tracking-tight glow-text mb-4">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-serif-accent text-white tracking-tight glow-text mb-4">
               Catatan Verifikasi Dokumen
             </h1>
-            <p className="text-lg text-slate-400 max-w-2xl leading-relaxed">
+            <p className="text-base sm:text-lg text-slate-400 max-w-2xl leading-relaxed">
               Daftar 50 percobaan verifikasi terbaru di sistem DocuVerify UNY.
               Total <span className="text-[#8ff5ff] font-bold">{totalCount}</span> verifikasi telah tercatat sejak sistem aktif.
             </p>
@@ -194,7 +194,7 @@ export default async function HistoryPage() {
               </table>
             </div>
 
-            <div className="px-6 py-4 border-t border-outline-variant/10">
+            <div className="px-4 sm:px-6 py-4 border-t border-outline-variant/10">
               <span className="text-xs text-slate-500 font-medium">
                 Menampilkan {verifications.length} riwayat terbaru dari total{" "}
                 {totalCount}

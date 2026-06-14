@@ -121,7 +121,7 @@ export function QrVerifyForm({ publicCode, disabled = false }: Props) {
   } satisfies Record<QrVerifyStatus, { icon: string; label: string; className: string }>;
 
   return (
-    <div className="glass-card border border-[#424858]/20 p-6 md:p-8">
+    <div className="glass-card border border-[#424858]/20 p-5 sm:p-6 md:p-8">
       <h2 className="font-headline text-xl text-white mb-2">
         Bandingkan File PDF
       </h2>
@@ -183,7 +183,7 @@ export function QrVerifyForm({ publicCode, disabled = false }: Props) {
         <button
           type="submit"
           disabled={disabled || loading || !fileName}
-          className="w-full bg-[#8ff5ff] text-[#080e1c] py-4 font-headline font-bold text-sm uppercase tracking-widest hover:bg-[#b3faff] active:scale-95 transition-all flex items-center justify-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed"
+          className="min-h-12 w-full bg-[#8ff5ff] text-[#080e1c] py-4 px-4 font-headline font-bold text-xs sm:text-sm uppercase tracking-wider sm:tracking-widest hover:bg-[#b3faff] active:scale-95 transition-all flex items-center justify-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed"
         >
           {loading ? (
             "Memproses Verifikasi..."

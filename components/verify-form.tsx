@@ -164,10 +164,10 @@ export function VerifyForm() {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
       {/* Left Column: Upload Form */}
-      <div className="lg:col-span-5 space-y-6">
+      <div className="lg:col-span-5 space-y-6 min-w-0">
         <form
           onSubmit={handleSubmit}
-          className="glass-card neon-border p-8 relative overflow-hidden"
+          className="glass-card neon-border p-5 sm:p-8 relative overflow-hidden"
         >
           <div className="absolute top-0 left-0 w-1 h-full bg-[#8ff5ff]" />
 
@@ -212,7 +212,7 @@ export function VerifyForm() {
                 </div>
               ) : (
                 /* Drop zone state */
-                <label className="border-2 border-dashed border-[#424858]/40 rounded-xl p-12 text-center hover:bg-[#8ff5ff]/5 hover:border-[#8ff5ff]/30 transition-colors cursor-pointer group block">
+                <label className="border-2 border-dashed border-[#424858]/40 rounded-xl p-8 sm:p-12 text-center hover:bg-[#8ff5ff]/5 hover:border-[#8ff5ff]/30 transition-colors cursor-pointer group block">
                   <span className="material-symbols-outlined text-4xl text-slate-500 group-hover:text-[#8ff5ff] transition-colors mb-3 block">
                     upload_file
                   </span>
@@ -243,7 +243,7 @@ export function VerifyForm() {
             <button
               type="submit"
               disabled={state.loading || !state.fileName}
-              className="w-full bg-[#8ff5ff] text-[#080e1c] py-5 font-headline font-bold text-lg tracking-tight hover:bg-[#b3faff] active:scale-95 transition-all flex items-center justify-center gap-3 shadow-[0_0_20px_rgba(143,245,255,0.25)] disabled:opacity-40 disabled:cursor-not-allowed"
+              className="min-h-12 w-full bg-[#8ff5ff] text-[#080e1c] py-5 px-4 font-headline font-bold text-base sm:text-lg tracking-tight hover:bg-[#b3faff] active:scale-95 transition-all flex items-center justify-center gap-3 shadow-[0_0_20px_rgba(143,245,255,0.25)] disabled:opacity-40 disabled:cursor-not-allowed"
             >
               {state.loading ? (
                 <>
@@ -279,14 +279,14 @@ export function VerifyForm() {
       </div>
 
       {/* Right Column: Results */}
-      <div className="lg:col-span-7 space-y-6">
+      <div className="lg:col-span-7 space-y-6 min-w-0">
         {/* Status Card */}
         <div className={`glass-card overflow-hidden relative ${
           state.result
             ? `border ${statusConfig[state.result.status].bgClass.split(" ")[1]} ${statusConfig[state.result.status].glowShadow}`
             : "border border-[#424858]/20"
         }`}>
-          <div className="p-10 flex flex-col items-center text-center">
+          <div className="p-6 sm:p-10 flex flex-col items-center text-center">
             {state.result ? (() => {
               const config = statusConfig[state.result.status];
               return (
@@ -299,7 +299,7 @@ export function VerifyForm() {
                       {config.icon}
                     </span>
                   </div>
-                  <h2 className="font-headline text-4xl md:text-5xl font-extrabold tracking-tighter text-white mb-2">
+                  <h2 className="font-headline text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tighter text-white mb-2 break-words">
                     <span className={config.colorClass}>
                       {config.label}
                     </span>
@@ -315,7 +315,7 @@ export function VerifyForm() {
                     shield
                   </span>
                 </div>
-                <h2 className="font-headline text-4xl font-extrabold tracking-tighter text-slate-600 mb-2">
+                <h2 className="font-headline text-3xl sm:text-4xl font-extrabold tracking-tighter text-slate-600 mb-2">
                   MENUNGGU INPUT
                 </h2>
                 <p className="text-slate-500 text-sm max-w-md">
@@ -328,7 +328,7 @@ export function VerifyForm() {
 
           {/* Hash Comparison */}
           {state.result && (
-            <div className="bg-surface-container-highest/20 p-8 border-t border-[#424858]/20 relative">
+            <div className="bg-surface-container-highest/20 p-5 sm:p-8 border-t border-[#424858]/20 relative">
               {state.result.status === "VALID" && state.result.referenceHash && (
                 <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#080e1c] border-2 border-secondary rounded-full w-8 h-8 z-10 hidden md:flex items-center justify-center shadow-[0_0_15px_rgba(78,222,163,0.3)]">
                   <span className="material-symbols-outlined text-secondary text-sm font-bold">check</span>
@@ -386,7 +386,7 @@ export function VerifyForm() {
 
         {/* Document Details (when VALID) */}
         {state.result?.status === "VALID" && state.result.document && (
-          <div className="glass-card p-8 border border-secondary/10 animate-fade-in-up">
+          <div className="glass-card p-5 sm:p-8 border border-secondary/10 animate-fade-in-up">
             <h3 className="font-headline text-lg font-bold text-white mb-6 flex items-center gap-2">
               <span className="material-symbols-outlined text-secondary" style={{ fontVariationSettings: "'FILL' 1" }}>
                 description

@@ -59,7 +59,7 @@ function AdminLoginContent() {
   }
 
   return (
-    <div className="min-h-screen bg-[#080e1c] flex items-center justify-center px-4 sm:px-6 relative overflow-hidden">
+    <div className="min-h-screen bg-[#080e1c] flex items-center justify-center px-4 sm:px-6 py-8 relative overflow-hidden">
       {/* Background decorations */}
       <div className="absolute top-[-20%] right-[-10%] w-[500px] h-[500px] bg-[#8ff5ff]/[0.04] blur-[150px] rounded-full pointer-events-none" />
       <div className="absolute bottom-[-15%] left-[-10%] w-[400px] h-[400px] bg-[#8ff5ff]/[0.03] blur-[120px] rounded-full pointer-events-none" />
@@ -68,13 +68,13 @@ function AdminLoginContent() {
       <div className="w-full max-w-[420px] relative z-10">
         {/* Logo & Branding */}
         <div className="text-center mb-10">
-          <Link href="/" className="inline-flex items-center gap-3 mb-8 group">
+          <Link href="/" className="inline-flex max-w-full items-center gap-3 mb-8 group">
             <div className="w-11 h-11 rounded-xl bg-[#8ff5ff]/10 border border-[#8ff5ff]/30 flex items-center justify-center group-hover:bg-[#8ff5ff]/15 group-hover:border-[#8ff5ff]/50 transition-all duration-300">
               <span className="material-symbols-outlined text-[#8ff5ff] text-xl" style={{ fontVariationSettings: "'FILL' 1" }}>
                 verified_user
               </span>
             </div>
-            <span className="text-xl font-black tracking-tight text-white uppercase font-headline">
+            <span className="truncate text-lg sm:text-xl font-black tracking-tight text-white uppercase font-headline">
               DocuVerify <span className="text-[#8ff5ff]">UNY</span>
             </span>
           </Link>
@@ -91,7 +91,7 @@ function AdminLoginContent() {
           {/* Top accent line */}
           <div className="h-[2px] bg-gradient-to-r from-transparent via-[#8ff5ff]/40 to-transparent" />
 
-          <form onSubmit={handleSubmit} className="p-8 sm:p-10 space-y-6">
+          <form onSubmit={handleSubmit} className="p-5 sm:p-8 md:p-10 space-y-6">
             {/* Email Field */}
             <div>
               <label htmlFor="email" className="block text-[11px] font-semibold uppercase tracking-widest text-slate-400 mb-3">
@@ -158,7 +158,7 @@ function AdminLoginContent() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-gradient-to-r from-[#8ff5ff] to-[#6be8f7] text-[#080e1c] py-4 rounded-xl font-headline font-bold text-sm tracking-wide hover:from-[#b3faff] hover:to-[#8ff5ff] active:scale-[0.98] transition-all duration-200 flex items-center justify-center gap-3 shadow-[0_4px_20px_rgba(143,245,255,0.25)] disabled:opacity-50 disabled:cursor-not-allowed disabled:active:scale-100"
+              className="min-h-12 w-full bg-gradient-to-r from-[#8ff5ff] to-[#6be8f7] text-[#080e1c] py-4 px-4 rounded-xl font-headline font-bold text-sm tracking-wide hover:from-[#b3faff] hover:to-[#8ff5ff] active:scale-[0.98] transition-all duration-200 flex items-center justify-center gap-3 shadow-[0_4px_20px_rgba(143,245,255,0.25)] disabled:opacity-50 disabled:cursor-not-allowed disabled:active:scale-100"
             >
               {loading ? (
                 <>

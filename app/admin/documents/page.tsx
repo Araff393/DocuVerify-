@@ -80,7 +80,7 @@ export default async function AdminDocumentsPage({
       actions={
         <Link
           href="/admin/documents/create"
-          className="bg-[#8ff5ff] text-[#080e1c] px-6 py-3 font-headline font-bold text-xs uppercase tracking-widest hover:bg-[#b3faff] active:scale-95 transition-all flex items-center gap-2 shadow-[0_0_15px_rgba(143,245,255,0.2)]"
+          className="min-h-11 w-full justify-center sm:w-auto bg-[#8ff5ff] text-[#080e1c] px-6 py-3 font-headline font-bold text-xs uppercase tracking-widest hover:bg-[#b3faff] active:scale-95 transition-all flex items-center gap-2 shadow-[0_0_15px_rgba(143,245,255,0.2)]"
         >
           <span className="material-symbols-outlined text-lg">add</span>
           Dokumen Baru
@@ -93,7 +93,7 @@ export default async function AdminDocumentsPage({
         className="bg-surface-container-low p-4 flex flex-wrap items-center justify-between gap-4 rounded-xl mb-6 border border-outline-variant/10"
       >
         {/* Search */}
-        <div className="flex-1 min-w-[280px] relative">
+        <div className="w-full flex-1 min-w-0 sm:min-w-[280px] relative">
           <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-500">
             search
           </span>
@@ -107,11 +107,11 @@ export default async function AdminDocumentsPage({
         </div>
 
         {/* Filters */}
-        <div className="flex items-center gap-3 flex-wrap">
+        <div className="flex w-full items-center gap-3 flex-wrap lg:w-auto">
           <select
             name="documentType"
             defaultValue={documentType ?? ""}
-            className="form-select bg-surface-container-highest text-white text-xs py-3 px-4 rounded-lg border-outline-variant/20 min-w-[160px]"
+            className="form-select w-full sm:w-auto bg-surface-container-highest text-white text-xs py-3 px-4 rounded-lg border-outline-variant/20 min-w-0 sm:min-w-[160px]"
           >
             <option value="">Semua Jenis</option>
             {documentTypeList.map((type) => (
@@ -124,7 +124,7 @@ export default async function AdminDocumentsPage({
           <select
             name="faculty"
             defaultValue={faculty ?? ""}
-            className="form-select bg-surface-container-highest text-white text-xs py-3 px-4 rounded-lg border-outline-variant/20 min-w-[200px]"
+            className="form-select w-full sm:w-auto bg-surface-container-highest text-white text-xs py-3 px-4 rounded-lg border-outline-variant/20 min-w-0 sm:min-w-[200px]"
           >
             <option value="">Semua Fakultas</option>
             {facultyList.map((fac) => (
@@ -137,7 +137,7 @@ export default async function AdminDocumentsPage({
           <select
             name="status"
             defaultValue={status ?? ""}
-            className="form-select bg-surface-container-highest text-white text-xs py-3 px-4 rounded-lg border-outline-variant/20 min-w-[140px]"
+            className="form-select w-full sm:w-auto bg-surface-container-highest text-white text-xs py-3 px-4 rounded-lg border-outline-variant/20 min-w-0 sm:min-w-[140px]"
           >
             <option value="">Semua Status</option>
             <option value="ACTIVE">Aktif</option>
@@ -146,7 +146,7 @@ export default async function AdminDocumentsPage({
 
           <button
             type="submit"
-            className="bg-[#8ff5ff]/10 text-[#8ff5ff] border border-[#8ff5ff]/30 px-4 py-3 rounded-lg text-xs font-bold uppercase tracking-wider hover:bg-[#8ff5ff]/20 transition-colors"
+            className="min-h-11 w-full sm:w-auto bg-[#8ff5ff]/10 text-[#8ff5ff] border border-[#8ff5ff]/30 px-4 py-3 rounded-lg text-xs font-bold uppercase tracking-wider hover:bg-[#8ff5ff]/20 transition-colors"
           >
             Filter
           </button>

@@ -10,7 +10,7 @@ export default function HomePage() {
 
       <main>
         {/* Hero Section */}
-        <section className="relative min-h-[90vh] flex items-center px-6 md:px-16 overflow-hidden grid-pattern py-20 pt-32">
+        <section className="relative min-h-[90vh] flex items-center px-4 sm:px-6 md:px-16 overflow-hidden grid-pattern py-20 pt-32">
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#080e1c]/50 to-[#080e1c] pointer-events-none" />
           <div className="max-w-4xl z-10">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#8ff5ff]/5 border border-[#8ff5ff]/20 rounded-full mb-8">
@@ -20,11 +20,11 @@ export default function HomePage() {
               </span>
             </div>
 
-            <h1 className="text-5xl md:text-7xl font-serif-accent text-white leading-[1.05] mb-8 tracking-tight glow-text">
+            <h1 className="text-4xl sm:text-5xl md:text-7xl font-serif-accent text-white leading-[1.08] mb-8 tracking-tight glow-text">
               Sistem Verifikasi Keaslian Dokumen Akademik
             </h1>
 
-            <p className="text-xl md:text-2xl text-slate-300 font-normal max-w-2xl mb-12 leading-relaxed">
+            <p className="text-lg sm:text-xl md:text-2xl text-slate-300 font-normal max-w-2xl mb-12 leading-relaxed">
               Pastikan keaslian dokumen akademik Anda secara aman dan transparan
               melalui teknologi hash kriptografis berstandar institusi.
             </p>
@@ -32,14 +32,14 @@ export default function HomePage() {
             <div className="flex flex-col sm:flex-row gap-6">
               <Link
                 href="/verify"
-                className="bg-[#8ff5ff] text-[#080e1c] px-10 py-5 text-sm font-black uppercase tracking-[0.2em] hover:bg-[#b3faff] transition-all flex items-center justify-center gap-3 active:scale-95 shadow-[0_0_20px_rgba(143,245,255,0.3)]"
+                className="min-h-12 bg-[#8ff5ff] text-[#080e1c] px-6 sm:px-10 py-5 text-xs sm:text-sm font-black uppercase tracking-[0.16em] sm:tracking-[0.2em] hover:bg-[#b3faff] transition-all flex items-center justify-center gap-3 active:scale-95 shadow-[0_0_20px_rgba(143,245,255,0.3)]"
               >
                 <span className="material-symbols-outlined text-xl">verified_user</span>
                 Verifikasi Dokumen
               </Link>
               <Link
                 href="/admin/login"
-                className="border border-[#8ff5ff]/30 text-white px-10 py-5 text-sm font-black uppercase tracking-[0.2em] hover:bg-[#8ff5ff]/10 hover:border-[#8ff5ff]/60 transition-all flex items-center justify-center gap-3 active:scale-95"
+                className="min-h-12 border border-[#8ff5ff]/30 text-white px-6 sm:px-10 py-5 text-xs sm:text-sm font-black uppercase tracking-[0.16em] sm:tracking-[0.2em] hover:bg-[#8ff5ff]/10 hover:border-[#8ff5ff]/60 transition-all flex items-center justify-center gap-3 active:scale-95"
               >
                 <span className="material-symbols-outlined text-xl">login</span>
                 Login Admin
@@ -57,14 +57,14 @@ export default function HomePage() {
         </section>
 
         {/* Process Section */}
-        <section className="py-32 px-6 md:px-16 relative">
+        <section className="py-24 md:py-32 px-4 sm:px-6 md:px-16 relative">
           <div className="max-w-7xl mx-auto">
-            <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-24 gap-8">
+            <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-16 md:mb-24 gap-8">
               <div>
                 <span className="text-[#8ff5ff] text-xs font-bold uppercase tracking-[0.4em] block mb-4">
                   Alur Verifikasi
                 </span>
-                <h3 className="text-4xl md:text-5xl font-serif-accent text-white tracking-tight glow-text">
+                <h3 className="text-3xl sm:text-4xl md:text-5xl font-serif-accent text-white tracking-tight glow-text">
                   Proses Verifikasi Dokumen
                 </h3>
               </div>
@@ -76,7 +76,7 @@ export default function HomePage() {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
               {/* Step 1 */}
-              <div className="glass-card neon-border p-10 md:p-12 transition-all group relative overflow-hidden">
+              <div className="glass-card neon-border p-6 sm:p-10 md:p-12 transition-all group relative overflow-hidden">
                 <div className="scan-line" />
                 <div className="w-16 h-16 border border-[#8ff5ff]/30 flex items-center justify-center mb-10 group-hover:border-[#8ff5ff] group-hover:bg-[#8ff5ff]/5 transition-all duration-500">
                   <span className="material-symbols-outlined text-4xl text-[#8ff5ff]">upload_file</span>
@@ -89,7 +89,7 @@ export default function HomePage() {
               </div>
 
               {/* Step 2 */}
-              <div className="glass-card neon-border p-10 md:p-12 transition-all group relative overflow-hidden">
+              <div className="glass-card neon-border p-6 sm:p-10 md:p-12 transition-all group relative overflow-hidden">
                 <div className="scan-line" style={{ animationDelay: "1.5s" }} />
                 <div className="w-16 h-16 border border-[#8ff5ff]/30 flex items-center justify-center mb-10 group-hover:border-[#8ff5ff] group-hover:bg-[#8ff5ff]/5 transition-all duration-500">
                   <span className="material-symbols-outlined text-4xl text-[#8ff5ff]">fingerprint</span>
@@ -102,7 +102,7 @@ export default function HomePage() {
               </div>
 
               {/* Step 3 */}
-              <div className="glass-card neon-border p-10 md:p-12 transition-all group relative overflow-hidden">
+              <div className="glass-card neon-border p-6 sm:p-10 md:p-12 transition-all group relative overflow-hidden">
                 <div className="scan-line" style={{ animationDelay: "3s" }} />
                 <div className="w-16 h-16 border border-[#8ff5ff]/30 flex items-center justify-center mb-10 group-hover:border-[#8ff5ff] group-hover:bg-[#8ff5ff]/5 transition-all duration-500">
                   <span className="material-symbols-outlined text-4xl text-[#8ff5ff]">policy</span>
@@ -118,20 +118,20 @@ export default function HomePage() {
         </section>
 
         {/* Features Bento Grid */}
-        <section className="py-32 px-6 md:px-16">
+        <section className="py-24 md:py-32 px-4 sm:px-6 md:px-16">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-24">
               <span className="text-[#8ff5ff] text-xs font-bold uppercase tracking-[0.5em] block mb-4">
                 Keunggulan Sistem
               </span>
-              <h3 className="text-4xl md:text-5xl font-serif-accent text-white tracking-tight">
+              <h3 className="text-3xl sm:text-4xl md:text-5xl font-serif-accent text-white tracking-tight">
                 Pilar Keamanan Dokumen
               </h3>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-rows-2 gap-6 h-auto lg:min-h-[650px]">
               {/* Large Feature: Hash Security */}
-              <div className="md:col-span-6 lg:col-span-3 lg:row-span-2 glass-card neon-border p-10 md:p-12 flex flex-col justify-between relative overflow-hidden group">
+              <div className="md:col-span-6 lg:col-span-3 lg:row-span-2 glass-card neon-border p-6 sm:p-10 md:p-12 flex flex-col justify-between relative overflow-hidden group">
                 <div className="z-10">
                   <span className="material-symbols-outlined text-6xl mb-8 block text-[#8ff5ff]">enhanced_encryption</span>
                   <h4 className="text-3xl font-serif-accent text-white mb-6 tracking-tight">
@@ -155,9 +155,9 @@ export default function HomePage() {
               </div>
 
               {/* Verification Speed */}
-              <div className="md:col-span-6 lg:col-span-3 glass-card neon-border p-10 flex flex-col justify-between relative overflow-hidden">
+              <div className="md:col-span-6 lg:col-span-3 glass-card neon-border p-6 sm:p-10 flex flex-col justify-between relative overflow-hidden">
                 <div>
-                  <div className="flex items-center gap-4 mb-6">
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-4 mb-6">
                     <span className="material-symbols-outlined text-[#8ff5ff] text-3xl">bolt</span>
                     <h4 className="text-xl font-bold text-white uppercase tracking-wider">Verifikasi Instan</h4>
                   </div>
@@ -172,7 +172,7 @@ export default function HomePage() {
               </div>
 
               {/* Transparent Records */}
-              <div className="md:col-span-6 lg:col-span-2 glass-card neon-border p-10 flex flex-col justify-center">
+              <div className="md:col-span-6 lg:col-span-2 glass-card neon-border p-6 sm:p-10 flex flex-col justify-center">
                 <span className="material-symbols-outlined text-[#8ff5ff] mb-6 text-4xl">history</span>
                 <h4 className="text-xl font-bold text-white mb-4 uppercase tracking-wider">Riwayat Transparan</h4>
                 <p className="text-[#e3e7fc]/70 text-sm leading-relaxed font-normal">
@@ -182,7 +182,7 @@ export default function HomePage() {
               </div>
 
               {/* Trusted Results */}
-              <div className="md:col-span-6 lg:col-span-1 bg-[#8ff5ff] p-10 lg:p-8 flex flex-col items-center justify-center text-center transition-all hover:brightness-110 cursor-default">
+              <div className="md:col-span-6 lg:col-span-1 bg-[#8ff5ff] p-8 sm:p-10 lg:p-8 flex flex-col items-center justify-center text-center transition-all hover:brightness-110 cursor-default">
                 <span
                   className="material-symbols-outlined text-5xl mb-6 text-[#080e1c]"
                   style={{ fontVariationSettings: "'FILL' 1" }}
@@ -198,8 +198,8 @@ export default function HomePage() {
         </section>
 
         {/* CTA Section */}
-        <section className="py-32 px-6 md:px-16">
-          <div className="max-w-7xl mx-auto glass-card border border-[#8ff5ff]/10 p-10 md:p-16 lg:p-20 relative overflow-hidden">
+        <section className="py-24 md:py-32 px-4 sm:px-6 md:px-16">
+          <div className="max-w-7xl mx-auto glass-card border border-[#8ff5ff]/10 p-6 sm:p-10 md:p-16 lg:p-20 relative overflow-hidden">
             <div className="absolute top-0 right-0 w-96 h-96 bg-[#8ff5ff]/5 blur-[150px] rounded-full pointer-events-none" />
             <div className="absolute bottom-0 left-1/2 w-64 h-64 bg-[#8ff5ff]/3 blur-[120px] rounded-full pointer-events-none" />
             <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16 relative z-10">
@@ -209,7 +209,7 @@ export default function HomePage() {
                   <span className="w-2 h-2 rounded-full bg-[#8ff5ff] pulse-dot" />
                   <span className="text-[10px] uppercase tracking-[0.25em] text-[#8ff5ff] font-bold">Siap Digunakan</span>
                 </span>
-                <h3 className="text-4xl md:text-5xl font-serif-accent text-white mb-8 tracking-tight glow-text">
+                <h3 className="text-3xl sm:text-4xl md:text-5xl font-serif-accent text-white mb-8 tracking-tight glow-text">
                   Mulai Verifikasi Sekarang
                 </h3>
                 <p className="text-lg text-[#e3e7fc]/70 mb-12 leading-relaxed font-normal max-w-lg mx-auto lg:mx-0">
@@ -219,7 +219,7 @@ export default function HomePage() {
                 <div className="flex flex-col sm:flex-row flex-wrap gap-6 items-center justify-center lg:justify-start">
                   <Link
                     href="/verify"
-                    className="bg-[#8ff5ff] text-[#080e1c] px-10 py-5 text-sm font-black uppercase tracking-[0.2em] hover:bg-[#b3faff] transition-all active:scale-95 w-full sm:w-auto text-center shadow-[0_0_30px_rgba(143,245,255,0.2)]"
+                    className="min-h-12 bg-[#8ff5ff] text-[#080e1c] px-6 sm:px-10 py-5 text-xs sm:text-sm font-black uppercase tracking-[0.16em] sm:tracking-[0.2em] hover:bg-[#b3faff] transition-all active:scale-95 w-full sm:w-auto text-center shadow-[0_0_30px_rgba(143,245,255,0.2)]"
                   >
                     Verifikasi Dokumen
                   </Link>

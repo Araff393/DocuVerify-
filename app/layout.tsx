@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Outfit, Syne, DM_Serif_Display, JetBrains_Mono } from "next/font/google";
 
+import { PageTransitionLoader } from "@/components/page-transition-loader";
 import "@/app/globals.css";
 
 const outfit = Outfit({
@@ -47,6 +48,7 @@ export default function RootLayout({
         />
       </head>
       <body className="font-body">
+        <PageTransitionLoader />
         {children}
       </body>
     </html>

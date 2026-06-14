@@ -35,7 +35,7 @@ function StatusPanel({ status }: { status: "REGISTERED" | "NOT_REGISTERED" | "RE
   }[status];
 
   return (
-    <div className={`border p-6 md:p-8 ${config.className}`}>
+    <div className={`border p-5 sm:p-6 md:p-8 ${config.className}`}>
       <div className="flex flex-col md:flex-row md:items-center gap-5">
         <div className="w-16 h-16 bg-[#080e1c]/50 flex items-center justify-center shrink-0">
           <span
@@ -49,7 +49,7 @@ function StatusPanel({ status }: { status: "REGISTERED" | "NOT_REGISTERED" | "RE
           <span className="text-[11px] font-bold uppercase tracking-[0.2em]">
             {config.label}
           </span>
-          <h1 className="font-headline text-3xl md:text-5xl text-white mt-1 mb-2">
+          <h1 className="font-headline text-3xl md:text-5xl text-white mt-1 mb-2 break-words">
             {config.title}
           </h1>
           <p className="text-slate-300">{config.message}</p>
@@ -103,13 +103,13 @@ export default async function PublicDocumentVerificationPage({ params }: Params)
     <div className="bg-[#080e1c] text-[#f8fafc] min-h-screen selection:bg-[#8ff5ff]/30 selection:text-[#8ff5ff]">
       <Navigation />
 
-      <main className="pt-28 pb-20 px-6 md:px-16">
+      <main className="pt-28 pb-20 px-4 sm:px-6 md:px-16">
         <div className="max-w-6xl mx-auto space-y-8">
           <StatusPanel status={pageStatus} />
 
           {document ? (
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-              <section className="lg:col-span-7 glass-card border border-[#424858]/20 p-6 md:p-8">
+              <section className="lg:col-span-7 glass-card border border-[#424858]/20 p-5 sm:p-6 md:p-8 min-w-0">
                 <div className="flex items-center justify-between gap-4 mb-6">
                   <div>
                     <p className="text-[11px] uppercase tracking-[0.2em] text-[#8ff5ff] font-bold mb-2">
@@ -139,7 +139,7 @@ export default async function PublicDocumentVerificationPage({ params }: Params)
                       <span className="block text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-1">
                         {item.label}
                       </span>
-                      <span className="block text-sm text-white break-words">
+                      <span className="block text-sm text-white break-all sm:break-words">
                         {item.value}
                       </span>
                     </div>
@@ -147,7 +147,7 @@ export default async function PublicDocumentVerificationPage({ params }: Params)
                 </div>
               </section>
 
-              <section className="lg:col-span-5">
+              <section className="lg:col-span-5 min-w-0">
                 <QrVerifyForm
                   publicCode={document.publicCode}
                   disabled={document.status === "REVOKED"}
@@ -155,7 +155,7 @@ export default async function PublicDocumentVerificationPage({ params }: Params)
               </section>
             </div>
           ) : (
-            <div className="glass-card border border-[#424858]/20 p-8 text-center">
+            <div className="glass-card border border-[#424858]/20 p-5 sm:p-8 text-center">
               <p className="text-slate-400 mb-6">
                 Kode publik <code className="text-[#8ff5ff]">{publicCode}</code> tidak
                 terhubung ke dokumen manapun.

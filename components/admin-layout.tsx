@@ -13,15 +13,15 @@ export function AdminLayout({ title, subtitle, children, actions }: AdminLayoutP
   return (
     <>
       {/* Top Nav Bar */}
-      <header className="fixed top-0 w-full z-50 bg-[#0d1321] shadow-[0_0_15px_rgba(0,240,255,0.06)] h-20 flex items-center justify-between px-8 border-b border-[#1a2332]">
-        <div className="flex items-center gap-8">
-          <Link href="/admin/dashboard" className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-[#8ff5ff]/10 border border-[#8ff5ff]/30 flex items-center justify-center">
+      <header className="fixed top-0 w-full z-50 bg-[#0d1321] shadow-[0_0_15px_rgba(0,240,255,0.06)] h-20 flex items-center justify-between px-4 sm:px-6 md:px-8 border-b border-[#1a2332]">
+        <div className="flex min-w-0 items-center gap-4 md:gap-8">
+          <Link href="/admin/dashboard" className="flex min-w-0 items-center gap-3">
+            <div className="w-8 h-8 rounded-lg bg-[#8ff5ff]/10 border border-[#8ff5ff]/30 flex items-center justify-center shrink-0">
               <span className="material-symbols-outlined text-[#8ff5ff] text-lg" style={{ fontVariationSettings: "'FILL' 1" }}>
                 verified_user
               </span>
             </div>
-            <span className="text-lg font-bold tracking-tighter font-headline text-white">
+            <span className="truncate text-base sm:text-lg font-bold tracking-tighter font-headline text-white">
               DocuVerify <span className="text-[#8ff5ff]">UNY</span>
             </span>
           </Link>
@@ -44,17 +44,17 @@ export function AdminLayout({ title, subtitle, children, actions }: AdminLayoutP
       <AdminSidebar />
 
       {/* Main Content */}
-      <main className="pt-28 md:ml-72 px-6 md:px-12 pb-20 min-h-screen">
+      <main className="pt-28 md:ml-72 px-4 sm:px-6 md:px-12 pb-28 md:pb-20 min-h-screen overflow-x-hidden">
         <header className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-4">
-          <div>
-            <h1 className="text-4xl md:text-5xl font-headline font-bold text-white tracking-tight mb-2">
+          <div className="min-w-0">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-headline font-bold text-white tracking-tight mb-2 break-words">
               {title}
             </h1>
             {subtitle && (
-              <p className="text-slate-400 max-w-2xl leading-relaxed">{subtitle}</p>
+              <p className="text-sm sm:text-base text-slate-400 max-w-2xl leading-relaxed break-words">{subtitle}</p>
             )}
           </div>
-          {actions && <div className="flex items-center gap-3">{actions}</div>}
+          {actions && <div className="flex w-full flex-wrap items-center gap-3 sm:w-auto">{actions}</div>}
         </header>
         {children}
       </main>

@@ -146,8 +146,8 @@ export function DocumentActions({
           QR Code Dokumen
         </h3>
         <div className="flex flex-col items-center gap-4">
-          <div className="bg-white p-3 rounded-lg">
-            <canvas ref={qrCanvasRef} width={200} height={200} />
+          <div className="bg-white p-3 rounded-lg max-w-full overflow-hidden">
+            <canvas ref={qrCanvasRef} width={200} height={200} className="max-w-full h-auto" />
           </div>
           <p className="text-[10px] text-slate-500 text-center">
             QR Code berisi tautan verifikasi publik dokumen
@@ -173,7 +173,7 @@ export function DocumentActions({
           )}
           <button
             onClick={downloadQR}
-            className="w-full py-3 bg-surface-container-highest text-white font-headline font-bold text-xs uppercase tracking-widest rounded-lg flex items-center justify-center gap-2 hover:bg-surface-bright transition-all"
+            className="min-h-11 w-full py-3 px-4 bg-surface-container-highest text-white font-headline font-bold text-xs uppercase tracking-widest rounded-lg flex items-center justify-center gap-2 hover:bg-surface-bright transition-all"
           >
             <span className="material-symbols-outlined text-sm">download</span>
             Unduh QR Code
@@ -189,7 +189,7 @@ export function DocumentActions({
         <div className="space-y-2">
           <a
             href={`/api/documents/${documentId}/file?download=1`}
-            className="w-full py-3 bg-surface-container-highest text-white font-headline font-bold text-xs uppercase tracking-widest rounded-lg flex items-center justify-center gap-2 hover:bg-surface-bright transition-all"
+            className="min-h-11 w-full py-3 px-4 bg-surface-container-highest text-white font-headline font-bold text-xs uppercase tracking-widest rounded-lg flex items-center justify-center gap-2 hover:bg-surface-bright transition-all"
             title={fileName}
           >
             <span className="material-symbols-outlined text-sm">download</span>
@@ -199,7 +199,7 @@ export function DocumentActions({
             href={`/api/documents/${documentId}/file`}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full py-3 bg-surface-container-highest text-white font-headline font-bold text-xs uppercase tracking-widest rounded-lg flex items-center justify-center gap-2 hover:bg-surface-bright transition-all"
+            className="min-h-11 w-full py-3 px-4 bg-surface-container-highest text-white font-headline font-bold text-xs uppercase tracking-widest rounded-lg flex items-center justify-center gap-2 hover:bg-surface-bright transition-all"
           >
             <span className="material-symbols-outlined text-sm">visibility</span>
             Pratinjau PDF
@@ -208,7 +208,7 @@ export function DocumentActions({
           {status === "REVOKED" ? (
             <button
               disabled
-              className="w-full py-3 bg-error/5 border border-error/10 text-error/50 font-headline font-bold text-xs uppercase tracking-widest rounded-lg flex items-center justify-center gap-2 cursor-not-allowed"
+              className="min-h-11 w-full py-3 px-4 bg-error/5 border border-error/10 text-error/50 font-headline font-bold text-xs uppercase tracking-widest rounded-lg flex items-center justify-center gap-2 cursor-not-allowed"
             >
               <span className="material-symbols-outlined text-sm">block</span>
               Dokumen Sudah Dicabut
@@ -270,7 +270,7 @@ export function DocumentActions({
           ) : (
             <button
               onClick={() => setShowRevokeConfirm(true)}
-              className="w-full py-3 bg-error/10 border border-error/20 text-error font-headline font-bold text-xs uppercase tracking-widest rounded-lg flex items-center justify-center gap-2 hover:bg-error/20 transition-all"
+              className="min-h-11 w-full py-3 px-4 bg-error/10 border border-error/20 text-error font-headline font-bold text-xs uppercase tracking-widest rounded-lg flex items-center justify-center gap-2 hover:bg-error/20 transition-all"
             >
               <span className="material-symbols-outlined text-sm">block</span>
               Cabut Dokumen
