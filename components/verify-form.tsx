@@ -1,6 +1,8 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
+
+import { VerificationResultReveal } from "@/components/verification-result-reveal";
 
 type VerificationStatus = "VALID" | "NOT_REGISTERED" | "INVALID";
 
@@ -31,8 +33,24 @@ type VerifyState = {
 
 export function VerifyForm() {
   const [state, setState] = useState<VerifyState>({ loading: false });
+  const [pendingResult, setPendingResult] = useState<VerifyResult | null>(null);
+  const [showResultReveal, setShowResultReveal] = useState(false);
   const fileRef = useRef<File | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
+
+  const finishResultReveal = useCallback(() => {
+    if (!pendingResult) {
+      setShowResultReveal(false);
+      return;
+    }
+
+    setShowResultReveal(false);
+    setState({
+      loading: false,
+      result: pendingResult,
+    });
+    setPendingResult(null);
+  }, [pendingResult]);
 
   function clearSelectedFile() {
     fileRef.current = null;
@@ -114,10 +132,11 @@ export function VerifyForm() {
       }
 
       clearSelectedFile();
+      setPendingResult(data as VerifyResult);
       setState({
         loading: false,
-        result: data as VerifyResult,
       });
+      setShowResultReveal(true);
     } catch {
       setState((prev) => ({
         ...prev,
@@ -162,6 +181,11 @@ export function VerifyForm() {
   };
 
   return (
+    <>
+    <VerificationResultReveal
+      visible={showResultReveal}
+      onDone={finishResultReveal}
+    />
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
       {/* Left Column: Upload Form */}
       <div className="lg:col-span-5 space-y-6 min-w-0">
@@ -463,5 +487,6 @@ export function VerifyForm() {
         )}
       </div>
     </div>
+    </>
   );
 }

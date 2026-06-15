@@ -64,57 +64,52 @@ canvas {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background: #080e1c;
+  background:
+    linear-gradient(135deg, rgba(8, 14, 28, 0.98), rgba(16, 24, 45, 0.98)),
+    #080e1c;
   opacity: 0;
   pointer-events: none;
-  transform: scale(1.01);
   transition:
     opacity 220ms ease,
     transform 420ms ease;
+  transform: translateY(8px);
 }
 
 .page-transition-loader--visible {
   opacity: 1;
-  transform: scale(1);
+  transform: translateY(0);
   pointer-events: none;
 }
 
-.page-transition-loader__video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.page-transition-loader__fallback {
-  position: absolute;
-  inset: 0;
-  display: none;
+.page-transition-loader__content {
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 14px;
-  background:
-    radial-gradient(circle at center, rgba(143, 245, 255, 0.12), transparent 34%),
-    #080e1c;
-}
-
-.page-transition-loader--fallback .page-transition-loader__video {
-  display: none;
-}
-
-.page-transition-loader--fallback .page-transition-loader__fallback {
-  display: flex;
+  animation: loader-content-enter 520ms ease both;
 }
 
 .page-transition-loader__mark {
   width: 64px;
   height: 64px;
+  position: relative;
   border: 1px solid rgba(143, 245, 255, 0.35);
   background: rgba(143, 245, 255, 0.08);
   display: flex;
   align-items: center;
   justify-content: center;
   color: #8ff5ff;
+  animation: loader-mark-pulse 1200ms ease-in-out infinite;
+}
+
+.page-transition-loader__mark::before {
+  content: "";
+  position: absolute;
+  inset: -7px;
+  border: 2px solid rgba(143, 245, 255, 0.16);
+  border-top-color: #8ff5ff;
+  animation: loader-ring-spin 900ms linear infinite;
 }
 
 .page-transition-loader__mark .material-symbols-outlined {
@@ -131,24 +126,74 @@ canvas {
   letter-spacing: 0.22em;
 }
 
-@media (max-width: 640px) {
-  .page-transition-loader__video {
-    object-fit: contain;
-    background: #080e1c;
+.verification-result-reveal {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #080e1c;
+  animation: verification-reveal-enter 160ms ease both;
+}
+
+.verification-result-reveal__video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@keyframes loader-ring-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes loader-mark-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 rgba(143, 245, 255, 0);
+  }
+  50% {
+    box-shadow: 0 0 28px rgba(143, 245, 255, 0.22);
+  }
+}
+
+@keyframes loader-content-enter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes verification-reveal-enter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .page-transition-loader__video {
-    display: none;
-  }
-
-  .page-transition-loader__fallback {
-    display: flex;
-  }
-
   .page-transition-loader {
     transition: opacity 120ms ease;
+  }
+
+  .page-transition-loader__content,
+  .page-transition-loader__mark,
+  .page-transition-loader__mark::before,
+  .verification-result-reveal {
+    animation: none;
+  }
+
+  .verification-result-reveal__video {
+    display: none;
   }
 }
 
@@ -163,6 +208,41 @@ canvas {
 .grid-pattern {
   background-image: radial-gradient(circle at 2px 2px, rgba(143, 245, 255, 0.05) 1px, transparent 0);
   background-size: 40px 40px;
+}
+
+.landing-spline-frame {
+  position: absolute;
+  inset: 4% -6% 0 5%;
+  z-index: 2;
+  overflow: hidden;
+  opacity: 0.78;
+  mix-blend-mode: screen;
+  mask-image: linear-gradient(90deg, transparent 0%, black 22%, black 74%, transparent 100%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 22%, black 74%, transparent 100%);
+}
+
+.landing-spline-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 52% 48%, transparent 0 28%, rgba(8, 14, 28, 0.16) 46%, rgba(8, 14, 28, 0.7) 100%),
+    linear-gradient(90deg, rgba(8, 14, 28, 0.9), transparent 30%, transparent 62%, rgba(8, 14, 28, 0.35));
+}
+
+.landing-spline-scene,
+.landing-spline-scene > div,
+.landing-spline-scene canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.landing-spline-scene {
+  position: relative;
+  height: 100%;
+  transform: scale(1.08);
+  transform-origin: center;
 }
 
 /* Glass Card (landing page) */

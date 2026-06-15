@@ -53,3 +53,5 @@ Thumbs.db
 .idea
 
 .vercel
+
+testsprite_tests\tmp\config.json

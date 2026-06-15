@@ -1,6 +1,8 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
+
+import { VerificationResultReveal } from "@/components/verification-result-reveal";
 
 type QrVerifyStatus = "VALID" | "INVALID" | "NOT_REGISTERED" | "REVOKED";
 
@@ -25,6 +27,19 @@ export function QrVerifyForm({ publicCode, disabled = false }: Props) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<QrVerifyResult | null>(null);
+  const [pendingResult, setPendingResult] = useState<QrVerifyResult | null>(null);
+  const [showResultReveal, setShowResultReveal] = useState(false);
+
+  const finishResultReveal = useCallback(() => {
+    if (!pendingResult) {
+      setShowResultReveal(false);
+      return;
+    }
+
+    setShowResultReveal(false);
+    setResult(pendingResult);
+    setPendingResult(null);
+  }, [pendingResult]);
 
   function clearFile() {
     fileRef.current = null;
@@ -89,8 +104,9 @@ export function QrVerifyForm({ publicCode, disabled = false }: Props) {
       }
 
       clearFile();
-      setResult(data as QrVerifyResult);
+      setPendingResult(data as QrVerifyResult);
       setLoading(false);
+      setShowResultReveal(true);
     } catch {
       setError("Gagal terhubung ke server. Periksa koneksi Anda dan coba lagi.");
       setLoading(false);
@@ -121,6 +137,11 @@ export function QrVerifyForm({ publicCode, disabled = false }: Props) {
   } satisfies Record<QrVerifyStatus, { icon: string; label: string; className: string }>;
 
   return (
+    <>
+    <VerificationResultReveal
+      visible={showResultReveal}
+      onDone={finishResultReveal}
+    />
     <div className="glass-card border border-[#424858]/20 p-5 sm:p-6 md:p-8">
       <h2 className="font-headline text-xl text-white mb-2">
         Bandingkan File PDF
@@ -230,5 +251,6 @@ export function QrVerifyForm({ publicCode, disabled = false }: Props) {
         </div>
       )}
     </div>
+    </>
   );
 }

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 
+import { LandingSplineScene } from "@/components/landing-spline-scene";
 import { Navigation } from "@/components/navigation";
 
 export default function HomePage() {
@@ -48,10 +49,13 @@ export default function HomePage() {
           </div>
 
           {/* Abstract Tech Visual */}
-          <div className="absolute right-[-5%] top-1/2 -translate-y-1/2 w-[45%] h-[80%] hidden xl:block">
+          <div className="absolute right-[-15%] xl:right-[-5%] top-1/2 -translate-y-1/2 w-[55%] xl:w-[45%] h-[80%] hidden lg:block lg:opacity-60 xl:opacity-100 pointer-events-none xl:pointer-events-auto">
             <div className="relative w-full h-full">
               <div className="absolute inset-0 bg-gradient-to-r from-[#080e1c] to-transparent z-10" />
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-[#8ff5ff]/20 blur-[120px] rounded-full" />
+              <div className="landing-spline-frame">
+                <LandingSplineScene />
+              </div>
             </div>
           </div>
         </section>

@@ -3,16 +3,13 @@
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 
-const INITIAL_TRANSITION_MS = 700;
-const ROUTE_TRANSITION_MS = 500;
+const TRANSITION_MS = 2000;
 
 export function PageTransitionLoader() {
   const pathname = usePathname();
   const previousPathname = useRef<string | null>(null);
   const hideTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const videoRef = useRef<HTMLVideoElement | null>(null);
   const [visible, setVisible] = useState(false);
-  const [videoFailed, setVideoFailed] = useState(false);
 
   useEffect(() => {
     return () => {
@@ -21,9 +18,7 @@ export function PageTransitionLoader() {
   }, []);
 
   useEffect(() => {
-    const isInitialTransition = previousPathname.current === null;
-
-    if (isInitialTransition) {
+    if (previousPathname.current === null) {
       previousPathname.current = pathname;
       setVisible(true);
     } else if (previousPathname.current === pathname) {
@@ -35,45 +30,21 @@ export function PageTransitionLoader() {
 
     if (hideTimer.current) clearTimeout(hideTimer.current);
 
-    const video = videoRef.current;
-    if (video && !videoFailed) {
-      video.currentTime = 0;
-      const playPromise = video.play();
-      if (playPromise) {
-        playPromise.catch(() => setVideoFailed(true));
-      }
-    }
-
     hideTimer.current = setTimeout(() => {
       setVisible(false);
-    }, isInitialTransition ? INITIAL_TRANSITION_MS : ROUTE_TRANSITION_MS);
-  }, [pathname, videoFailed]);
+    }, TRANSITION_MS);
+  }, [pathname]);
 
   return (
     <div
-      className={`page-transition-loader ${
-        visible ? "page-transition-loader--visible" : ""
-      } ${videoFailed ? "page-transition-loader--fallback" : ""}`}
+      className={`page-transition-loader ${visible ? "page-transition-loader--visible" : ""}`}
       aria-hidden="true"
     >
-      {!videoFailed && (
-        <video
-          ref={videoRef}
-          className="page-transition-loader__video"
-          src="/videos/docuverify-page-transition.mp4"
-          muted
-          autoPlay
-          playsInline
-          preload="auto"
-          onEnded={() => setVisible(false)}
-          onError={() => setVideoFailed(true)}
-        />
-      )}
-      <div className="page-transition-loader__fallback">
+      <div className="page-transition-loader__content">
         <div className="page-transition-loader__mark">
           <span className="material-symbols-outlined">verified_user</span>
         </div>
-        <span className="page-transition-loader__text">DocuVerify UNY</span>
+        <span className="page-transition-loader__text">Memuat DocuVerify</span>
       </div>
     </div>
   );
