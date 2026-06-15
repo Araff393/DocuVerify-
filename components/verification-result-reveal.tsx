@@ -2,7 +2,8 @@
 
 import { useCallback, useEffect, useRef } from "react";
 
-const MAX_REVEAL_MS = 1800;
+// Fallback timeout in case the video fails to trigger onEnded event (10 seconds)
+const MAX_REVEAL_MS = 10000;
 
 type Props = {
   visible: boolean;
